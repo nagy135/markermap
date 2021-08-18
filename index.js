@@ -1,15 +1,16 @@
 const visitedPlaces = [
     {
-        name: "Krivan",
-        lat: 49.1481947,
-        lng: 19.9588182 
+        name: "Sitno",
+        lat: 48.4023742,
+        lng: 18.8661295,
+        altitude: 1009
     }
 ];
 function initMap() {
-    const myLatLng = { lat: 49.1481947, lng: 19.9588182 };
+    const slovakiaCenter = { lat: 48.6670441, lng: 19.7785865 };
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 10,
-        center: myLatLng,
+        zoom: 8,
+        center: slovakiaCenter,
     });
 
     for (const place of visitedPlaces){
@@ -19,7 +20,8 @@ function initMap() {
                 lng: place.lng,
             },
             map,
-            label: place.name
+            label: place.name,
+            title: place.name + " (" + place.altitude + "m)"
         });
     };
 }
