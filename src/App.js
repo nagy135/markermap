@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const Marker = ({ text }) => <div style={{ color: "red", fontSize: "large"}}>{text}</div>;
 export default function SimpleMap(){
 
     const slovakiaCenter = { lat: 48.6670441, lng: 19.7785865 };
@@ -38,13 +38,13 @@ export default function SimpleMap(){
                 defaultZoom={defaultProps.zoom}
             >
                 {visitedPlaces.map((item, index) => (
-                    <AnyReactComponent
+                    <Marker
                         lat={item.lat}
                         lng={item.lng}
                         text={item.name + " (" + item.altitude + ")"}
                     />
                 ))}
-                <AnyReactComponent
+                <Marker
                     className="slovakia-center"
                     lat={slovakiaCenter.lat}
                     lng={slovakiaCenter.lng}
