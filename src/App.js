@@ -33,12 +33,32 @@ export default function SimpleMap(){
         // Important! Always set the container height explicitly
         <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&" }}
+                bootstrapURLKeys={{
+                    key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&" ,
+                    v: "beta"
+                }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
+                layerTypes={['TransitLayer', 'TrafficLayer']}
+                options={() => {
+                    return {
+                        panControl: true,
+                        tilt: 40.0,
+                        zoomControl: true,
+                        mapTypeControl: true,
+                        scaleControl: true,
+                        streetViewControl: true,
+                        rotateControl: true,
+                        fullscreenControl: true,
+                        scrollwheel: true,
+                        mapTypeId: "satellite",
+
+
+                } } }
             >
                 {visitedPlaces.map((item, index) => (
                     <Marker
+                        key={index}
                         lat={item.lat}
                         lng={item.lng}
                         text={item.name + " (" + item.altitude + ")"}
