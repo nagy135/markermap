@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import './App.css';
 
-const Marker = ({ text }) => <div style={{ color: "red", fontSize: "large"}}>{text}</div>;
 export default function SimpleMap(){
 
     const slovakiaCenter = { lat: 48.6670441, lng: 19.7785865 };
@@ -26,7 +26,18 @@ export default function SimpleMap(){
             lat: slovakiaCenter.lat,
             lng: slovakiaCenter.lng
         },
-        zoom: 11
+        zoom: 8
+    };
+
+    const renderMarkers = (map, maps) => {
+        visitedPlaces.map((item) => {
+            new maps.Marker({
+                position: { lat: item.lat, lng: item.lng },
+                map,
+                title: item.name + ' (' + item.altitude + 'm. n. m.)',
+                label: item.name
+            });
+        });
     };
 
     return (
@@ -39,7 +50,9 @@ export default function SimpleMap(){
                 }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-                layerTypes={['TransitLayer', 'TrafficLayer']}
+                yesIWantToUseGoogleMapApiInternals
+                onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
+                // layerTypes={['TransitLayer', 'TrafficLayer']}
                 options={() => {
                     return {
                         panControl: true,
@@ -51,25 +64,10 @@ export default function SimpleMap(){
                         rotateControl: true,
                         fullscreenControl: true,
                         scrollwheel: true,
-                        mapTypeId: "satellite",
 
 
-                } } }
+                    } } }
             >
-                {visitedPlaces.map((item, index) => (
-                    <Marker
-                        key={index}
-                        lat={item.lat}
-                        lng={item.lng}
-                        text={item.name + " (" + item.altitude + ")"}
-                    />
-                ))}
-                <Marker
-                    className="slovakia-center"
-                    lat={slovakiaCenter.lat}
-                    lng={slovakiaCenter.lng}
-                    text="+"
-                />
             </GoogleMapReact>
         </div>
     );
