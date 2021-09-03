@@ -1,21 +1,17 @@
-
 import React from 'react';
-import clsx from 'clsx';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import Container from '@material-ui/core/Container';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+// import Container from '@material-ui/core/Container';
+import Fab from '@material-ui/core/Fab';
+import CloseIcon from '@material-ui/icons/Close';
+// import MailIcon from '@material-ui/icons/Mail';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles({
     list: {
@@ -44,23 +40,20 @@ export default function App() {
                 <React.Fragment key="left">
                     <Button onClick={toggleDrawer(true)}>Filter</Button>
                     <Drawer open={state} onClose={toggleDrawer(false)}>
-                        <div
-                            className={clsx(classes.list, {
-                                [classes.fullList]: false,
-                            })}
-                            role="presentation"
-                            onClick={toggleDrawer(false)}
-                            onKeyDown={toggleDrawer(false)}
-                        >
-                            <List>
-                                <ListItem button key="close">
-                                    <ListItemIcon></ListItemIcon>
-                                    <ListItemText primary="close" />
-                                </ListItem>
-                            </List>
-                            <Divider />
-                            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-                        </div>
+                        <Box
+                            className="close">
+                            <Fab 
+                                color="secondary" 
+                                aria-label="edit"
+                                onClick={toggleDrawer(false)}>
+                                <CloseIcon/>
+                            </Fab>
+                        </Box>
+                        <Divider />
+                        <Box
+                            className="query">
+                            <TextField id="outlined-basic" label="Query" variant="outlined" />
+                        </Box>
                     </Drawer>
                 </React.Fragment>
             </div>
