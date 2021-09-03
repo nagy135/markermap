@@ -1,0 +1,14 @@
+.drawer {
+    position: fixed;
+    bottom:0;
+    background-color: white;
+    z-index: 999;
+}
+.drawer:hover {
+    background-color: #0b0b0b;
+    color: white;
+}
+
+.drawer:hover span {
+    color: white;
+}
