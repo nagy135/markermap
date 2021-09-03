@@ -1,4 +1,4 @@
- 
+
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
@@ -17,82 +18,54 @@ import Map from './components/Map';
 // import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
+    list: {
+        width: 250,
+    },
+    fullList: {
+        width: 'auto',
+    },
 });
 
 export default function App() {
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+    const classes = useStyles();
+    const [state, setState] = React.useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+    const toggleDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
 
-    setState({ ...state, [anchor]: open });
-  };
+        setState(open);
+    };
 
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  return (
-    <Container>
-        {['left'].map((anchor) => (
+    return (
+        <div>
             <div class="drawer">
-                <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                    <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                        {list(anchor)}
+                <React.Fragment key="left">
+                    <Button onClick={toggleDrawer(true)}>Filter</Button>
+                    <Drawer open={state} onClose={toggleDrawer(false)}>
+                        <div
+                            className={clsx(classes.list, {
+                                [classes.fullList]: false,
+                            })}
+                            role="presentation"
+                            onClick={toggleDrawer(false)}
+                            onKeyDown={toggleDrawer(false)}
+                        >
+                            <List>
+                                <ListItem button key="close">
+                                    <ListItemIcon></ListItemIcon>
+                                    <ListItemText primary="close" />
+                                </ListItem>
+                            </List>
+                            <Divider />
+                            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                        </div>
                     </Drawer>
                 </React.Fragment>
             </div>
-        ))}
-        <Map>
-        </Map>
-    </Container>
-  );
+            <Map>
+            </Map>
+        </div>
+    );
 }
-
-
-/////////////////////
-/////////////////////
-/////////////////////
-/////////////////////
-/////////////////////
-
