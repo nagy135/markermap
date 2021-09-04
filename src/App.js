@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 // import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@material-ui/icons/Search';
 // import MailIcon from '@material-ui/icons/Mail';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
@@ -38,7 +39,7 @@ export default function App() {
         <div>
             <div class="drawer">
                 <React.Fragment key="left">
-                    <Button onClick={toggleDrawer(true)}>Filter</Button>
+                    <Button onClick={toggleDrawer(true)}><SearchIcon/>Filter</Button>
                     <Drawer open={state} onClose={toggleDrawer(false)}>
                         <Box
                             className="close">

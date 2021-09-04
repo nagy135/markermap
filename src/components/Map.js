@@ -16,6 +16,12 @@ import GoogleMapReact from 'google-map-react';
              lng: 19.36288620314865,
              altitude: 1630
          },
+         {
+             name: "Zaruby",
+             lat: 48.52358157633058,
+             lng: 17.39166116080486,
+             altitude: 768
+         },
  
      ];
  
