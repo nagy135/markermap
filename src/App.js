@@ -1,17 +1,14 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-// import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-// import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
-// import MailIcon from '@material-ui/icons/Mail';
-// import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
@@ -19,6 +16,8 @@ import Map from './components/Map';
 export default function App() {
     const [state, setState] = React.useState(false);
     const [slider, setSlider] = React.useState([100,2000]);
+    const [sliderText, setSliderText] = React.useState("");
+
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -30,6 +29,7 @@ export default function App() {
 
     const handleSliderChange = (_event, newValue) => {
         setSlider(newValue);
+        setSliderText(newValue[0] + " / " + newValue[1]);
     };
 
     return (
@@ -63,7 +63,7 @@ export default function App() {
                                 getAriaValueText={()=>{"haha"}}>
                             </Slider>
                         </Box>
-                        {/*     <TextField id="outlined-basic" label="Query" variant="outlined" /> */}
+                        <TextField id="outlined-basic" label="Query" variant="outlined" value={sliderText}/>
                     </Drawer>
                 </React.Fragment>
             </div>
