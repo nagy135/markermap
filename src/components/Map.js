@@ -1,8 +1,11 @@
 import GoogleMapReact from 'google-map-react';
+import React from 'react';
 
 import { visited, slovakiaCenter } from '../resources/locations';
 
- export default function Map(){
+function Map(props){
+
+    const [markers, setMarkers] = React.useState([]);
  
      const defaultProps = {
          center: {
@@ -14,14 +17,22 @@ import { visited, slovakiaCenter } from '../resources/locations';
  
      const renderMarkers = (map, maps) => {
          visited.map((item) => {
-             new maps.Marker({
+             const marker = new maps.Marker({
                  position: { lat: item.lat, lng: item.lng },
                  map,
                  title: item.name + ' (' + item.altitude + 'm. n. m.)',
                  label: item.name
              });
+             setMarkers(markers.push(marker));
          });
      };
+
+     const onAltitudesChange = (values) => {
+     };
+
+     React.useEffect(()=> {
+         onAltitudesChange(props.altitudes);
+     });
  
      return (
          // Important! Always set the container height explicitly
@@ -55,3 +66,5 @@ import { visited, slovakiaCenter } from '../resources/locations';
          </div>
      );
  }
+
+export default Map;
