@@ -7,6 +7,8 @@ function Map(props){
 
     const [markers, setMarkers] = React.useState([]);
 
+    const [mapInstance, setMapInstance] = React.useState(null);
+
     const defaultProps = {
         center: {
             lat: slovakiaCenter.lat,
@@ -16,19 +18,30 @@ function Map(props){
     };
 
     const renderMarkers = (map, maps) => {
+
+        setMapInstance(map);
+
+        let newMarkers = [];
         visited.map((item) => {
             const marker = new maps.Marker({
                 position: { lat: item.lat, lng: item.lng },
                 map,
+                altitude: item.altitude,
                 title: item.name + ' (' + item.altitude + 'm. n. m.)',
                 label: item.name
             });
-            setMarkers(markers.push(marker));
+            newMarkers.push(marker);
         });
+        setMarkers(newMarkers);
     };
 
     const onAltitudesChange = (values) => {
-        console.log('remove markers');
+        markers.map((item) => {
+            if (item.altitude < values[0] || item.altitude > values[1] )
+                item.setMap(null);
+            else if (item.map == null)
+                item.setMap(mapInstance);
+        });
     };
 
     React.useEffect(()=> {
