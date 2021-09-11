@@ -17,6 +17,12 @@ export const visited = [
              lng: 17.39166116080486,
              altitude: 768
          },
+         {
+             name: "Baranec",
+             lat: 49.17382677567287,
+             lng: 19.742156530646067,
+             altitude: 2185
+         },
 ];
 
 export const slovakiaCenter = {
