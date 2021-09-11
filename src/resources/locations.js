@@ -7,9 +7,9 @@ export const visited = [
          },
          {
              name: "Salatin",
-             lat: 48.98032903440475,
-             lng: 19.36288620314865,
-             altitude: 1630
+             lat: 49.21354394510231,
+             lng: 19.68621609293984,
+             altitude: 2047
          },
          {
              name: "Zaruby",
