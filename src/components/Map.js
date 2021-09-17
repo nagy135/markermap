@@ -37,6 +37,7 @@ function Map(props){
                     lat: item.lat,
                     lng: item.lng,
                     altitude: item.altitude,
+                    images: visited[item.id].images
                 });
             });
             newMarkers.push(marker);
