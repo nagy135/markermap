@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -15,6 +15,7 @@ import Map from './components/Map';
 import ImageCarousel from './components/ImageCarousel';
 
 export default function App() {
+
     const [searchState, setSearchState] = React.useState(false);
     const [detailState, setDetailState] = React.useState(false);
     const [selectedMarker, setSelectedMarker] = React.useState({
@@ -22,6 +23,7 @@ export default function App() {
         lat: "",
         lng: "",
         altitude: "",
+        images: []
     });
     const [slider, setSlider] = React.useState([100,2000]);
     const [sliderText, setSliderText] = React.useState("");
@@ -31,7 +33,6 @@ export default function App() {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
         setSearchState(open);
     };
     const toggleDetail = (open) => (event) => {
