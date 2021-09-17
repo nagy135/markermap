@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
+import ImageCarousel from './components/ImageCarousel';
 
 export default function App() {
     const [searchState, setSearchState] = React.useState(false);
@@ -104,6 +105,9 @@ export default function App() {
                         <Box className="detail-line">
                             <TextField id="outlined-basic" label="Altitude" variant="outlined" value={selectedMarker.altitude}/>
                         </Box>
+                        <ImageCarousel
+                            marker={selectedMarker}>
+                        </ImageCarousel>
                     </Drawer>
                 </React.Fragment>
             </div>
