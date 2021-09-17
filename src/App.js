@@ -14,7 +14,14 @@ import './App.css';
 import Map from './components/Map';
 
 export default function App() {
-    const [state, setState] = React.useState(false);
+    const [searchState, setSearchState] = React.useState(false);
+    const [detailState, setDetailState] = React.useState(false);
+    const [selectedMarker, setSelectedMarker] = React.useState({
+        name: "",
+        lat: "",
+        lng: "",
+        altitude: "",
+    });
     const [slider, setSlider] = React.useState([100,2000]);
     const [sliderText, setSliderText] = React.useState("");
 
@@ -24,7 +31,13 @@ export default function App() {
             return;
         }
 
-        setState(open);
+        setSearchState(open);
+    };
+    const toggleDetail = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+        setDetailState(open);
     };
 
     const handleSliderChange = (_event, newValue) => {
@@ -37,7 +50,7 @@ export default function App() {
             <div className="drawer">
                 <React.Fragment key="left">
                     <Button onClick={toggleDrawer(true)}><SearchIcon/>Filter</Button>
-                    <Drawer open={state} onClose={toggleDrawer(false)}>
+                    <Drawer open={searchState} onClose={toggleDrawer(false)}>
                         <Box
                             className="close">
                             <Fab 
@@ -67,7 +80,38 @@ export default function App() {
                     </Drawer>
                 </React.Fragment>
             </div>
+            <div className="detail">
+                <React.Fragment key="bottom">
+                    <Drawer anchor="right" open={detailState} onClose={toggleDetail(false)}>
+                        <Box
+                            className="close">
+                            <Fab 
+                                color="secondary" 
+                                aria-label="edit"
+                                onClick={toggleDetail(false)}>
+                                <CloseIcon/>
+                            </Fab>
+                        </Box>
+                        <Box className="detail-line">
+                            <TextField id="outlined-basic" label="Name" variant="outlined" value={selectedMarker.name}/>
+                        </Box>
+                        <Box className="detail-line">
+                            <TextField id="outlined-basic" label="Latitude" variant="outlined" value={selectedMarker.lat}/>
+                        </Box>
+                        <Box className="detail-line">
+                            <TextField id="outlined-basic" label="Longitude" variant="outlined" value={selectedMarker.lng}/>
+                        </Box>
+                        <Box className="detail-line">
+                            <TextField id="outlined-basic" label="Altitude" variant="outlined" value={selectedMarker.altitude}/>
+                        </Box>
+                    </Drawer>
+                </React.Fragment>
+            </div>
             <Map
+                markerClicked={(marker) => {
+                    setSelectedMarker(marker);
+                    setDetailState(true);
+                }}
                 altitudes={slider}>
             </Map>
         </div>

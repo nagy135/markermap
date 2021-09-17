@@ -31,8 +31,13 @@ function Map(props){
                 label: item.name
             });
             marker.addListener("click", () => {
-                map.setZoom(8);
                 map.setCenter(marker.getPosition());
+                props.markerClicked({
+                    name: item.name,
+                    lat: item.lat,
+                    lng: item.lng,
+                    altitude: item.altitude,
+                });
             });
             newMarkers.push(marker);
         });
