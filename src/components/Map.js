@@ -30,6 +30,10 @@ function Map(props){
                 title: item.name + ' (' + item.altitude + 'm. n. m.)',
                 label: item.name
             });
+            marker.addListener("click", () => {
+                map.setZoom(8);
+                map.setCenter(marker.getPosition());
+            });
             newMarkers.push(marker);
         });
         setMarkers(newMarkers);
