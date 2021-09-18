@@ -12,22 +12,17 @@ import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
+import { useSelector } from 'react-redux';
 import ImageCarousel from './components/ImageCarousel';
 
 export default function App() {
 
     const [searchState, setSearchState] = React.useState(false);
     const [detailState, setDetailState] = React.useState(false);
-    const [selectedMarker, setSelectedMarker] = React.useState({
-        name: "",
-        lat: "",
-        lng: "",
-        altitude: "",
-        images: []
-    });
     const [slider, setSlider] = React.useState([100,2000]);
-    const [sliderText, setSliderText] = React.useState("");
+    const [sliderText, setSliderText] = React.useState("100 / 2000");
 
+    const marker = useSelector((state) => state.marker.selected);
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -78,7 +73,13 @@ export default function App() {
                                 getAriaValueText={()=>{"haha"}}>
                             </Slider>
                         </Box>
-                        <TextField id="outlined-basic" label="Query" variant="outlined" value={sliderText}/>
+                        <TextField 
+                            id="outlined-basic" 
+                            label="Altitude range" 
+                            variant="outlined" 
+                            value={sliderText}
+                            InputProps={{ readOnly: true }}
+                        />
                     </Drawer>
                 </React.Fragment>
             </div>
@@ -95,26 +96,49 @@ export default function App() {
                             </Fab>
                         </Box>
                         <Box className="detail-line">
-                            <TextField id="outlined-basic" label="Name" variant="outlined" value={selectedMarker.name}/>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Name" 
+                                variant="outlined" 
+                                value={marker.name}
+                                InputProps={{ readOnly: true }}
+                            />
                         </Box>
                         <Box className="detail-line">
-                            <TextField id="outlined-basic" label="Latitude" variant="outlined" value={selectedMarker.lat}/>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Latitude" 
+                                variant="outlined" 
+                                value={marker.lat}
+                                InputProps={{ readOnly: true }}
+                            />
                         </Box>
                         <Box className="detail-line">
-                            <TextField id="outlined-basic" label="Longitude" variant="outlined" value={selectedMarker.lng}/>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Longitude" 
+                                variant="outlined" 
+                                value={marker.lng}
+                                InputProps={{ readOnly: true }}
+                            />
                         </Box>
                         <Box className="detail-line">
-                            <TextField id="outlined-basic" label="Altitude" variant="outlined" value={selectedMarker.altitude}/>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Altitude" 
+                                variant="outlined" 
+                                value={marker.altitude}
+                                InputProps={{ readOnly: true }}
+                            />
                         </Box>
                         <ImageCarousel
-                            marker={selectedMarker}>
+                            marker={marker}>
                         </ImageCarousel>
                     </Drawer>
                 </React.Fragment>
             </div>
             <Map
-                markerClicked={(marker) => {
-                    setSelectedMarker(marker);
+                markerClicked={() => {
                     setDetailState(true);
                 }}
                 altitudes={slider}>

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Carousel from "react-simply-carousel";
+import { useSelector } from 'react-redux';
 
 function ImageCarousel(props) {
     const [activeSlide, setActiveSlide] = useState(0);
 
-    if (props.marker.images.length > 0)
+    const marker = useSelector((state) => state.marker.selected);
+
+    if (marker.images.length > 0)
         return (
             <Carousel
                 activeSlideIndex={activeSlide}
@@ -37,10 +40,10 @@ function ImageCarousel(props) {
                 }}
                 speed={400}
             >
-                {props.marker.images.map((image, i) => {
+                {marker.images.map((image, i) => {
                     return (
                         <div>
-                            <img key={i + "-" + props.marker.name} style={{width: "150px"}} src={image} alt="not" />
+                            <img key={i + "-" + marker.name} style={{width: "150px"}} src={image} alt="not" />
                         </div>);
                 })}
             </Carousel>

@@ -3,7 +3,11 @@ import React from 'react';
 
 import { visited, slovakiaCenter } from '../resources/locations';
 
+import { useDispatch } from 'react-redux';
+import { change } from '../slices/markerSlice';
+
 function Map(props){
+    const dispatch = useDispatch();
 
     const [markers, setMarkers] = React.useState([]);
 
@@ -32,13 +36,14 @@ function Map(props){
             });
             marker.addListener("click", () => {
                 map.setCenter(marker.getPosition());
-                props.markerClicked({
+                props.markerClicked();
+                dispatch(change({
                     name: item.name,
                     lat: item.lat,
                     lng: item.lng,
                     altitude: item.altitude,
                     images: visited[item.id].images
-                });
+                }));
             });
             newMarkers.push(marker);
         });
