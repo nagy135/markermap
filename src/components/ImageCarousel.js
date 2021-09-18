@@ -44,7 +44,7 @@ function ImageCarousel(props) {
             >
                 {marker.images.map((image, i) => {
                     return (
-                        <div>
+                        <div key={i + "-" + marker.name + "_div"}>
                             <img key={i + "-" + marker.name} style={{width: "200px"}} src={image} alt="not" />
                         </div>);
                 })}
