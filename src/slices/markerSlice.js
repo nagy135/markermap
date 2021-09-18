@@ -1,24 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialSelectedState = {
-    name: "",
-    lat: "",
-    lng: "",
-    altitude: "",
-    images: []
+const initialState = {
+    selected: {
+        name: "",
+        lat: "",
+        lng: "",
+        altitude: "",
+        images: []
+    }
 };
 
 export const markerSlice = createSlice({
   name: 'marker',
-  initialState: {
-      selected: initialSelectedState
-  },
+  initialState: initialState,
   reducers: {
     change: (state, action) => {
-        state.selected = action.payload;
+        return {
+            ...state,
+            selected: action.payload
+        }
     },
-    clear: (state) => {
-      state.selected = initialSelectedState;
+    clear: (_state) => {
+        return initialState;
     },
   },
 })
