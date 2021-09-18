@@ -19,8 +19,11 @@ export default function App() {
 
     const [searchState, setSearchState] = React.useState(false);
     const [detailState, setDetailState] = React.useState(false);
-    const [slider, setSlider] = React.useState([100,2000]);
-    const [sliderText, setSliderText] = React.useState("100 / 2000");
+
+    const initialSlideValue = [100, 2000];
+    const sliderToText = (sliderArr) => sliderArr[0] + " / " + sliderArr[1];
+    const [slider, setSlider] = React.useState(initialSlideValue);
+    const [sliderText, setSliderText] = React.useState(sliderToText(initialSlideValue));
 
     const marker = useSelector((state) => state.marker.selected);
 
@@ -39,7 +42,7 @@ export default function App() {
 
     const handleSliderChange = (_event, newValue) => {
         setSlider(newValue);
-        setSliderText(newValue[0] + " / " + newValue[1]);
+        setSliderText(sliderToText(newValue));
     };
 
     return (
