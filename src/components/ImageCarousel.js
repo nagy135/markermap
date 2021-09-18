@@ -23,18 +23,20 @@ function ImageCarousel(props) {
                 forwardBtnProps={{
                     children: ">",
                     style: {
-                        width: 30,
+                        width: 15,
                         height: 60,
-                        minWidth: 30,
+                        minWidth: 15,
+                        padding: 0,
                         alignSelf: "center"
                     }
                 }}
                 backwardBtnProps={{
                     children: "<",
                     style: {
-                        width: 30,
+                        width: 15,
+                        padding: 0,
                         height: 60,
-                        minWidth: 30,
+                        minWidth: 15,
                         alignSelf: "center"
                     }
                 }}
@@ -43,7 +45,7 @@ function ImageCarousel(props) {
                 {marker.images.map((image, i) => {
                     return (
                         <div>
-                            <img key={i + "-" + marker.name} style={{width: "150px"}} src={image} alt="not" />
+                            <img key={i + "-" + marker.name} style={{width: "200px"}} src={image} alt="not" />
                         </div>);
                 })}
             </Carousel>
