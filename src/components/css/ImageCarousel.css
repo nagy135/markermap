@@ -1,0 +1,10 @@
+.close-image-backdrop {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+}
+
+.image-open-button {
+    display: flex;
+    justify-content: center;
+}

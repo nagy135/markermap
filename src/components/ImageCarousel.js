@@ -1,11 +1,49 @@
 import React, { useState } from "react";
 import Carousel from "react-simply-carousel";
-import { useSelector } from 'react-redux';
+import Backdrop from '@mui/material/Backdrop';
+import Fab from '@material-ui/core/Fab';
+import Box from '@material-ui/core/Box';
+import Button from '@mui/material/Button';
+import CloseIcon from '@material-ui/icons/Close';
 
-function ImageCarousel() {
+import "./css/ImageCarousel.css";
+
+export default function SimpleBackdrop({ marker }) {
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
+
+    return (
+        <div>
+            <Box className="image-open-button">
+                <Button onClick={handleToggle}>Images</Button>
+            </Box>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <Fab
+                    className="close-image-backdrop"
+                    color="secondary"
+                    aria-label="edit"
+                    onClick={handleClose}>
+                    <CloseIcon/>
+                </Fab>
+                <ImageCarousel
+                    marker={marker}
+                >
+                </ImageCarousel>
+            </Backdrop>
+        </div>
+    );
+}
+
+function ImageCarousel({ marker }) {
     const [activeSlide, setActiveSlide] = useState(0);
-
-    const marker = useSelector((state) => state.marker.selected);
 
     if (marker.images.length > 0)
         return (
@@ -23,9 +61,9 @@ function ImageCarousel() {
                 forwardBtnProps={{
                     children: ">",
                     style: {
-                        width: 15,
+                        width: 30,
                         height: 60,
-                        minWidth: 15,
+                        minWidth: 30,
                         padding: 0,
                         alignSelf: "center"
                     }
@@ -33,10 +71,10 @@ function ImageCarousel() {
                 backwardBtnProps={{
                     children: "<",
                     style: {
-                        width: 15,
+                        width: 30,
                         padding: 0,
                         height: 60,
-                        minWidth: 15,
+                        minWidth: 30,
                         alignSelf: "center"
                     }
                 }}
@@ -44,8 +82,8 @@ function ImageCarousel() {
             >
                 {marker.images.map((image, i) => {
                     return (
-                        <div key={i + "-" + marker.name + "_div"}>
-                            <img key={i + "-" + marker.name} style={{width: "200px"}} src={image} alt="not" />
+                        <div className="imageWrapper" key={i + "-" + marker.name + "_div"}>
+                            <img className="image" key={i + "-" + marker.name} style={{width: "80vw"}} src={image} alt="not" />
                         </div>);
                 })}
             </Carousel>
@@ -53,4 +91,3 @@ function ImageCarousel() {
     else
         return "";
 }
-export default ImageCarousel;
