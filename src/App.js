@@ -12,8 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 import Map from './components/Map';
+import Detail from './components/Detail';
 import { useSelector } from 'react-redux';
-import ImageCarousel from './components/ImageCarousel';
 
 export default function App() {
 
@@ -84,60 +84,11 @@ export default function App() {
                     </Drawer>
                 </React.Fragment>
             </div>
-            <div className="detail">
-                <React.Fragment key="bottom">
-                    <Drawer anchor="right" open={detailState} onClose={toggleDetail(false)}>
-                        <Box
-                            className="close">
-                            <Fab 
-                                color="secondary" 
-                                aria-label="edit"
-                                onClick={toggleDetail(false)}>
-                                <CloseIcon/>
-                            </Fab>
-                        </Box>
-                        <Box className="detail-line">
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Name" 
-                                variant="outlined" 
-                                value={marker.name}
-                                InputProps={{ readOnly: true }}
-                            />
-                        </Box>
-                        <Box className="detail-line">
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Latitude" 
-                                variant="outlined" 
-                                value={marker.lat}
-                                InputProps={{ readOnly: true }}
-                            />
-                        </Box>
-                        <Box className="detail-line">
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Longitude" 
-                                variant="outlined" 
-                                value={marker.lng}
-                                InputProps={{ readOnly: true }}
-                            />
-                        </Box>
-                        <Box className="detail-line">
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Altitude" 
-                                variant="outlined" 
-                                value={marker.altitude}
-                                InputProps={{ readOnly: true }}
-                            />
-                        </Box>
-                        <ImageCarousel
-                            marker={marker}>
-                        </ImageCarousel>
-                    </Drawer>
-                </React.Fragment>
-            </div>
+            <Detail
+                open={detailState}
+                close={toggleDetail}
+            >
+            </Detail>
             <Map
                 markerClicked={() => {
                     setDetailState(true);

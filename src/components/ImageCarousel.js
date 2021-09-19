@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Carousel from "react-simply-carousel";
 import { useSelector } from 'react-redux';
 
-function ImageCarousel(props) {
+function ImageCarousel() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const marker = useSelector((state) => state.marker.selected);
