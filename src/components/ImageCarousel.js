@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Carousel from "react-simply-carousel";
 import Backdrop from '@mui/material/Backdrop';
-import Fab from '@material-ui/core/Fab';
-import Box from '@material-ui/core/Box';
+import Fab from '@mui/material/Fab';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 
 import "./css/ImageCarousel.css";
 

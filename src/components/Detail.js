@@ -1,9 +1,9 @@
 import React from "react";
-import Box from '@material-ui/core/Box';
-import Drawer from '@material-ui/core/Drawer';
-import Fab from '@material-ui/core/Fab';
-import CloseIcon from '@material-ui/icons/Close';
-import TextField from '@material-ui/core/TextField';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Fab from '@mui/material/Fab';
+import CloseIcon from '@mui/icons-material/Close';
+import TextField from '@mui/material/TextField';
 import ImageCarousel from './ImageCarousel';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ export default function Detail({open, close}){
                     <Box
                         className="close">
                         <Fab
-                            color="secondary"
+                            color="primary"
                             aria-label="edit"
                             onClick={close(false)}>
                             <CloseIcon/>

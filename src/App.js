@@ -2,7 +2,6 @@ import React from "react";
 import Map from './components/Map';
 import Detail from './components/Detail';
 import Filter from './components/Filter';
-import { useSelector } from 'react-redux';
 
 import './App.css';
 
@@ -13,8 +12,6 @@ export default function App() {
 
     const initialSlideValue = [100, 2000];
     const [altitudeRanges, setAltitudeRanges] = React.useState(initialSlideValue);
-
-    const marker = useSelector((state) => state.marker.selected);
 
     const toggleFilter = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {

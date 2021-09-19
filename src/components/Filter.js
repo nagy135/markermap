@@ -1,14 +1,14 @@
 import React from "react";
-import Box from '@material-ui/core/Box';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import Fab from '@material-ui/core/Fab';
-import CloseIcon from '@material-ui/icons/Close';
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Slider from '@mui/material/Slider';
+import Fab from '@mui/material/Fab';
+import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
 
 export default function Filter({open, close, handleRangeChange, altitudeRanges}){
     const sliderToText = (sliderArr) => sliderArr[0] + " / " + sliderArr[1];
@@ -20,7 +20,7 @@ export default function Filter({open, close, handleRangeChange, altitudeRanges})
                     <Box
                         className="close">
                         <Fab
-                            color="secondary"
+                            color="primary"
                             aria-label="edit"
                             onClick={close(false)}>
                             <CloseIcon/>
