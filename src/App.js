@@ -23,7 +23,6 @@ export default function App() {
     const initialSlideValue = [100, 2000];
     const sliderToText = (sliderArr) => sliderArr[0] + " / " + sliderArr[1];
     const [slider, setSlider] = React.useState(initialSlideValue);
-    const [sliderText, setSliderText] = React.useState(sliderToText(initialSlideValue));
 
     const marker = useSelector((state) => state.marker.selected);
 
@@ -42,7 +41,6 @@ export default function App() {
 
     const handleSliderChange = (_event, newValue) => {
         setSlider(newValue);
-        setSliderText(sliderToText(newValue));
     };
 
     return (
@@ -80,7 +78,7 @@ export default function App() {
                             id="outlined-basic" 
                             label="Altitude range" 
                             variant="outlined" 
-                            value={sliderText}
+                            value={sliderToText(slider)}
                             InputProps={{ readOnly: true }}
                         />
                     </Drawer>
