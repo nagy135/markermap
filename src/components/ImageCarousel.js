@@ -1,89 +1,45 @@
-import React, { useState } from "react";
-import Carousel from "react-simply-carousel";
-import Backdrop from '@mui/material/Backdrop';
-import Fab from '@mui/material/Fab';
+import React from "react";
+import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
+import { Carousel } from 'react-responsive-carousel';
 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./css/ImageCarousel.css";
 
-export default function SimpleBackdrop({ marker }) {
+export default function BasicModal({marker}) {
     const [open, setOpen] = React.useState(false);
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleToggle = () => {
-        setOpen(!open);
-    };
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <Box className="image-open-button">
-                <Button onClick={handleToggle}>Images</Button>
-            </Box>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            <Button className="image-open-button" onClick={handleOpen}>Images</Button>
+            <Modal
                 open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
-                <Fab
-                    className="close-image-backdrop"
-                    color="secondary"
-                    aria-label="edit"
-                    onClick={handleClose}>
-                    <CloseIcon/>
-                </Fab>
-                <ImageCarousel
-                    marker={marker}
-                >
-                </ImageCarousel>
-            </Backdrop>
+                <Box className="carousel-wrapper">
+                    <ImageCarousel
+                        marker={marker}>
+                    </ImageCarousel>
+                </Box>
+            </Modal>
         </div>
     );
 }
 
-function ImageCarousel({ marker }) {
-    const [activeSlide, setActiveSlide] = useState(0);
 
+function ImageCarousel({ marker }) {
     if (marker.images.length > 0)
         return (
-            <Carousel
-                activeSlideIndex={activeSlide}
-                onRequestChange={setActiveSlide}
-                itemsToShow={1}
-                itemsToScroll={1}
-                containerProps={{
-                    style: {
-                        width: "100%",
-                        justifyContent: "space-between"
-                    }
-                }}
-                forwardBtnProps={{
-                    children: ">",
-                    style: {
-                        width: 30,
-                        height: 60,
-                        minWidth: 30,
-                        padding: 0,
-                        alignSelf: "center"
-                    }
-                }}
-                backwardBtnProps={{
-                    children: "<",
-                    style: {
-                        width: 30,
-                        padding: 0,
-                        height: 60,
-                        minWidth: 30,
-                        alignSelf: "center"
-                    }
-                }}
-                speed={400}
-            >
+            <Carousel >
                 {marker.images.map((image, i) => {
                     return (
                         <div className="imageWrapper" key={i + "-" + marker.name + "_div"}>
-                            <img className="image" key={i + "-" + marker.name} style={{width: "80vw"}} src={image} alt="not" />
+                            <img className="image" key={i + "-" + marker.name} src={image} alt="not" />
                         </div>);
                 })}
             </Carousel>

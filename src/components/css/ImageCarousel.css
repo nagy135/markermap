@@ -8,3 +8,28 @@
     display: flex;
     justify-content: center;
 }
+
+.image-wrapper {
+    border: 2px solid red;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.image {
+    flex: 1;
+    height: 80vh;
+    vertical-align: middle;
+}
+.carousel-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    height: 80vh;
+    border: 2px solid #000;
+}
+
+.carousel .thumb img {
+    max-height: 100px !important;
+}
