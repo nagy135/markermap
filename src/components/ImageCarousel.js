@@ -35,7 +35,9 @@ export default function BasicModal({marker}) {
 function ImageCarousel({ marker }) {
     if (marker.images.length > 0)
         return (
-            <Carousel >
+            <Carousel
+                showThumbs={false}
+            >
                 {marker.images.map((image, i) => {
                     return (
                         <div className="imageWrapper" key={i + "-" + marker.name + "_div"}>
