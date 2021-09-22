@@ -31,7 +31,7 @@ export default function App() {
     };
 
     return (
-        <div>
+        <>
             <Filter
                 open={filterState}
                 close={toggleFilter}
@@ -50,6 +50,6 @@ export default function App() {
                 }}
                 altitudes={altitudeRanges}>
             </Map>
-        </div>
+        </>
     );
 }

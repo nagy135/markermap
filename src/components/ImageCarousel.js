@@ -13,7 +13,7 @@ export default function BasicModal({marker}) {
     const handleClose = () => setOpen(false);
 
     return (
-        <div>
+        <>
             <Button className="image-open-button" onClick={handleOpen}>Images</Button>
             <Modal
                 open={open}
@@ -27,10 +27,9 @@ export default function BasicModal({marker}) {
                     </ImageCarousel>
                 </Box>
             </Modal>
-        </div>
+        </>
     );
 }
-
 
 function ImageCarousel({ marker }) {
     if (marker.images.length > 0)
