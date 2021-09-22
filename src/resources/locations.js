@@ -58,8 +58,8 @@ export const visited = [
              altitude: 2185,
              images: [
                  matinka,
-                 kamen,
-                 mana
+                 mana,
+                 kamen
              ]
          },
 ];

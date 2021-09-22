@@ -39,7 +39,7 @@ function ImageCarousel({ marker }) {
             >
                 {marker.images.map((image, i) => {
                     return (
-                        <div className="imageWrapper" key={i + "-" + marker.name + "_div"}>
+                        <div className="image-wrapper" key={i + "-" + marker.name + "_div"}>
                             <img className="image" key={i + "-" + marker.name} src={image} alt="not" />
                         </div>);
                 })}
