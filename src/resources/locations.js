@@ -14,6 +14,10 @@ import chata_vyhlad from "../resources/images/sitno/chata_vyhlad.jpg";
 import vyhladSalatin from "../resources/images/salatin/vyhlad.jpg";
 import kiss from "../resources/images/salatin/kiss.jpg";
 
+import peak from "../resources/images/zlaty_vrch/peak.jpg";
+import car from "../resources/images/zlaty_vrch/car.jpg";
+import castle from "../resources/images/zlaty_vrch/castle.jpg";
+
 export const visited = [
          {
              id: 0,
@@ -60,6 +64,18 @@ export const visited = [
                  matinka,
                  mana,
                  kamen
+             ]
+         },
+         {
+             id: 4,
+             name: "Zlaty vrch",
+             lat: 48.4945313,
+             lng: 18.8553113,
+             altitude: 2185,
+             images: [
+                 peak,
+                 car,
+                 castle
              ]
          },
 ];
