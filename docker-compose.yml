@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  # DATABASE
+  postgres:
+    image: postgres:13.1
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:3210:5432"
+    env_file: ./env/.env.postgres
+
+  # BACKEND
+  api:
+    build:
+      dockerfile: ./dockerfile.develop
+      context: ./api
+    env_file:
+      - ./env/.env.api
+    ports:
+      - "127.0.0.1:3200:7000"
+    volumes:
+      - ./api/src:/home/node/app/src
+
+  # FRONTEND
+  app:
+    container_name: app
+    build:
+      context: ./app/
+      dockerfile: ./dockerfile.develop
+    volumes:
+      - ./app/src:/app/src
+      - ./app/public:/app/public
+      - ./app/assets:/app/assets
+    ports:
+      - "3300:3000"
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  database:
+    name: database
