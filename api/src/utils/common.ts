@@ -1,10 +1,18 @@
+import bcrypt from 'bcrypt';
+
 /**
  * @author Viktor Nagy <viktor.nagy@01people.com>
  */
-export const buildSongServiceUrl = (path: string): any => {
-  const serviceUrl = process.env.song_service;
-
-  return `${serviceUrl}${path}`;
+export const hash = async (password: string): Promise<string> => {
+  return bcrypt.hash(password, process.env.PASS_SALT as string);
 };
 
-export const getRoomName = (itemId: string): any => `room_${itemId}`;
+/**
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const compareHash = async (
+  password: string,
+  hash: string
+): Promise<boolean> => {
+  return bcrypt.compare(password, hash);
+};

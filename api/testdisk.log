@@ -1,0 +1,61 @@
+
+
+Mon Nov 15 14:24:04 2021
+Command line: TestDisk
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 5.13.19-2-MANJARO (#1 SMP PREEMPT Sun Sep 19 21:31:53 UTC 2021) x86_64
+Compiler: GCC 11.1
+ext2fs lib: 1.46.4, ntfs lib: libntfs-3g, reiserfs lib: 0.3.0.5, ewf lib: none, curses lib: ncurses 6.2
+User is not root!
+Hard disk list
+
+
+TestDisk exited normally.
+Using locale 'LC_CTYPE=en_US.utf8;LC_NUMERIC=sk_SK.UTF-8;LC_TIME=sk_SK.UTF-8;LC_COLLATE=en_US.utf8;LC_MONETARY=sk_SK.UTF-8;LC_MESSAGES=en_US.utf8;LC_PAPER=sk_SK.UTF-8;LC_NAME=sk_SK.UTF-8;LC_ADDRESS=sk_SK.UTF-8;LC_TELEPHONE=sk_SK.UTF-8;LC_MEASUREMENT=sk_SK.UTF-8;LC_IDENTIFICATION=sk_SK.UTF-8'.
+
+
+Mon Nov 15 14:24:04 2021
+Command line: TestDisk /debug
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 5.13.19-2-MANJARO (#1 SMP PREEMPT Sun Sep 19 21:31:53 UTC 2021) x86_64
+Compiler: GCC 11.1
+ext2fs lib: 1.46.4, ntfs lib: libntfs-3g, reiserfs lib: 0.3.0.5, ewf lib: none, curses lib: ncurses 6.2
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop0 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop1 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop2 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop3 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop4 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop5 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop6 - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop7 - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121600 255 63, sector size=512 - Samsung M3 Portable, FW:3
+Disk /dev/nvme0n1 - 512 GB / 476 GiB - CHS 488386 64 32, sector size=512
+
+Partition table type defaults to Intel
+Disk /dev/sda - 1000 GB / 931 GiB - Samsung M3 Portable
+Partition table type: EFI GPT
+
+Analyse Disk /dev/sda - 1000 GB / 931 GiB - CHS 121600 255 63
+Bad GPT partition, invalid signature.
+Trying alternate GPT
+Bad GPT partition, invalid signature.
+Current partition structure:
+Bad GPT partition, invalid signature.
+Trying alternate GPT
+Bad GPT partition, invalid signature.
+
+search_part()
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121600 255 63
+Search for partition aborted
+
+Results
+       0 0000 0000 00 00 00 00 00 00 00 00
+SIGINT detected! TestDisk has been killed.
