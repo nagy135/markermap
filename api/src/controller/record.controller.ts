@@ -1,21 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { RESPONSE_STATUS_OK, STATUS_HTTP_OK } from '@utils/http-codes';
-import UserHandler from '@handler/user';
+import RecordHandler from '@handler/record';
 import { TApplicationError } from '@utils/app-errors';
 
 /**
- * lists all users
+ * lists all records
  *
  * @author Viktor Nagy <viktor.nagy@01people.com>
  */
-export const getUsers = async (
+export const getRecords = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await UserHandler.getUsers(req.query);
+    const data = await RecordHandler.getRecords(req.query);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
@@ -27,17 +27,17 @@ export const getUsers = async (
 };
 
 /**
- * return user identified by id
+ * returns record identified by id
  *
  * @author Viktor Nagy <viktor.nagy@01people.com>
  */
-export const getUser = async (
+export const getRecord = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await UserHandler.getUser(req.params.userId);
+    const data = await RecordHandler.getRecord(req.params.recordId);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
