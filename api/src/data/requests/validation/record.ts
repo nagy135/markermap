@@ -12,3 +12,11 @@ export const getRecordsRequest = {
     ...paginationDefaults,
   },
 };
+
+export const createRecordRequest = {
+  body: {
+    name: yup.string().required(),
+    lat: yup.string().required(),
+    lon: yup.string().required(),
+  },
+};

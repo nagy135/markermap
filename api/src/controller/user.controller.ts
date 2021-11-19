@@ -59,11 +59,10 @@ export const createUser = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await UserHandler.createUser(req.body);
+    await UserHandler.createUser(req.body);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
-      data,
     });
   } catch (error) {
     next(error);

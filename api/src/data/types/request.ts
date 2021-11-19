@@ -16,4 +16,10 @@ export type TRequestCreateUser = {
 export type TRequestGetRecords = TPaginationOptions;
 
 export type TRequestGetRecord = Record<string, string>;
+
+export type TRequestCreateRecord = {
+  name: string;
+  lat: string;
+  lon: string;
+};
 // }}}

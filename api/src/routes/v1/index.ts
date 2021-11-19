@@ -51,6 +51,12 @@ RouterV1.get(
   RecordController.getRecord
 );
 
+RouterV1.post(
+  `${RECORD_ROUTE_BASE_PATH}`,
+  validate(RecordRequest.createRecordRequest),
+  RecordController.createRecord
+);
+
 // }}}
 
 export default RouterV1;

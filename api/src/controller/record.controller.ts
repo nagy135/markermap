@@ -47,3 +47,24 @@ export const getRecord = async (
     next(error);
   }
 };
+
+/**
+ * create record
+ *
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const createRecord = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | TApplicationError | undefined> => {
+  try {
+    await RecordHandler.createRecord(req.body);
+
+    return res.status(STATUS_HTTP_OK).send({
+      status: RESPONSE_STATUS_OK,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
