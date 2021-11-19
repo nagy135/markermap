@@ -1,6 +1,7 @@
 import Logger from '@handler/logger/winston';
 Logger.log('coreInfo', 'Starting Api-Gateway Application...');
 import createApplication from './app';
+import { createConnection } from 'typeorm';
 
 // Generic logging
 process.on('uncaughtException', (err: Error) => {
@@ -27,7 +28,8 @@ process.on('SIGTERM', () => {
 
 const run = async (): Promise<void> => {
   try {
-    createApplication();
+    await createConnection();
+    await createApplication();
     Logger.log('coreInfo', 'Application successfully started');
   } catch (err) {
     Logger.log('coreInfo', `Application start failed: ${err.stack}`);

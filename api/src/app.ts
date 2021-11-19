@@ -74,7 +74,7 @@ const corsOptions: any = {
 /**
  * Run function
  */
-const createApplication = (): void => {
+const createApplication = async () => {
   try {
     const app: Application = Express();
     app.use(bodyParser.json());
