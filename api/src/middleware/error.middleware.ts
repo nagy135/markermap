@@ -3,7 +3,10 @@ import { NextFunction, Request, Response } from 'express';
 import Logger from '@handler/logger/winston';
 import errorParser from '@utils/error-parser';
 import { STATUS_HTTP_INTERNAL_SERVER_ERROR } from '@utils/http-codes';
-import appErrors, { ERR_APP_DEFAULT } from '@utils/app-errors';
+import appErrors, {
+  ERR_APP_DEFAULT,
+  ERR_APP_ENTITY_NOT_FOUND,
+} from '@utils/app-errors';
 import { AxiosError } from 'axios';
 import { URL } from 'url';
 import globalConfig from '@config/global/config';
@@ -17,12 +20,28 @@ const errorMiddleware = (
   _next: NextFunction
 ) => {
   // Proccess known application error
-  if (error.name === 'AppException') {
+  if (error.name === 'AppException' || error.name === 'ValidationException') {
     const code = error.code as number;
     const appError = appErrors[code];
     Logger.log(appError.logSeverity, error.stack);
 
     const errorData = errorParser(code, error.detail);
+    return response.status(appError.httpStatusCode).send(errorData);
+  }
+
+  if (error.name === 'EntityNotFoundError') {
+    const code = ERR_APP_ENTITY_NOT_FOUND;
+    let entity = 'unknown';
+    const match = error.message.match(/"([a-zA-Z]*)"/);
+    if (match) entity = match[1];
+
+    const appError = appErrors[code];
+    Logger.log(appError.logSeverity, error.stack);
+
+    const errorData = errorParser(code, error.detail);
+    errorData.detail = {
+      entity,
+    };
     return response.status(appError.httpStatusCode).send(errorData);
   }
 
