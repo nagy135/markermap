@@ -20,3 +20,9 @@ export const createRecordRequest = {
     lon: yup.string().required(),
   },
 };
+
+export const deleteRecordRequest = {
+  params: {
+    recordId: yup.string().uuid().required(),
+  },
+};

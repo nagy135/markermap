@@ -57,6 +57,12 @@ RouterV1.post(
   RecordController.createRecord
 );
 
+RouterV1.delete(
+  `${RECORD_ROUTE_BASE_PATH}/:recordId`,
+  validate(RecordRequest.deleteRecordRequest),
+  RecordController.deleteRecord
+);
+
 // }}}
 
 export default RouterV1;

@@ -15,6 +15,11 @@ export default class RecordRepository extends Repository<RecordEntity> {
       .getOneOrFail();
   }
 
+  /**
+   * creates new record
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
   async make(data: TRequestCreateRecord): Promise<void> {
     const { name, lat, lon } = data;
 
@@ -25,5 +30,14 @@ export default class RecordRepository extends Repository<RecordEntity> {
     record.lon = lon;
 
     await record.save();
+  }
+
+  /**
+   * delete by id
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  async deleteById(id: string): Promise<void> {
+    await this.delete(id);
   }
 }

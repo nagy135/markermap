@@ -68,3 +68,24 @@ export const createRecord = async (
     next(error);
   }
 };
+
+/**
+ * delete record by id
+ *
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const deleteRecord = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | TApplicationError | undefined> => {
+  try {
+    await RecordHandler.deleteRecord(req.params.recordId);
+
+    return res.status(STATUS_HTTP_OK).send({
+      status: RESPONSE_STATUS_OK,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
