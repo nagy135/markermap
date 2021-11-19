@@ -69,3 +69,24 @@ export const createUser = async (
     next(error);
   }
 };
+
+/**
+ * deletes single user
+ *
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | TApplicationError | undefined> => {
+  try {
+    await UserHandler.deleteUser(req.params.userId);
+
+    return res.status(STATUS_HTTP_OK).send({
+      status: RESPONSE_STATUS_OK,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

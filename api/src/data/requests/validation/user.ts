@@ -20,3 +20,9 @@ export const createUserRequest = {
     password: yup.string().required(),
   },
 };
+
+export const deleteUserRequest = {
+  params: {
+    userId: yup.string().uuid().required(),
+  },
+};

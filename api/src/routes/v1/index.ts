@@ -9,6 +9,8 @@ import * as RecordController from '@controller/record.controller';
 import * as UserRequest from '@requests/validation/user';
 import * as RecordRequest from '@requests/validation/record';
 
+// users {{{
+
 const USER_ROUTE_BASE_PATH = '/users';
 RouterV1.get(
   `${USER_ROUTE_BASE_PATH}`,
@@ -27,6 +29,16 @@ RouterV1.post(
   UserController.createUser
 );
 
+RouterV1.delete(
+  `${USER_ROUTE_BASE_PATH}/:userId`,
+  validate(UserRequest.deleteUserRequest),
+  UserController.deleteUser
+);
+
+// }}}
+
+// records {{{
+
 const RECORD_ROUTE_BASE_PATH = '/records';
 RouterV1.get(
   `${RECORD_ROUTE_BASE_PATH}`,
@@ -38,5 +50,7 @@ RouterV1.get(
   validate(RecordRequest.getRecordRequest),
   RecordController.getRecord
 );
+
+// }}}
 
 export default RouterV1;

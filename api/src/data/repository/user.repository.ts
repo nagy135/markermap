@@ -33,4 +33,13 @@ export default class UserRepository extends Repository<UserEntity> {
 
     await user.save();
   }
+
+  /**
+   * deletes user by id
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  async deleteById(id: string): Promise<void> {
+    await this.delete(id);
+  }
 }
