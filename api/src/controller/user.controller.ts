@@ -10,12 +10,12 @@ import { TApplicationError } from '@utils/app-errors';
  * @author Viktor Nagy <viktor.nagy@01people.com>
  */
 export const getUsers = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await UserHandler.getUsers();
+    const data = await UserHandler.getUsers(req.query);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
@@ -32,7 +32,7 @@ export const getUser = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await UserHandler.getUser(req.params.id);
+    const data = await UserHandler.getUser(req.params.userId);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,

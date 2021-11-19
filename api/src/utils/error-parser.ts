@@ -2,7 +2,8 @@ import appErrors, { TApplicationError } from './app-errors';
 
 type TErrorResponse = {
   code: number;
-  message_code: string;
+  message: string;
+  detail?: any;
 };
 
 /**
@@ -10,12 +11,13 @@ type TErrorResponse = {
  *
  * @author jozef.repan@01people.com
  */
-const errorParser = (code: number, additionalInfo?: string): TErrorResponse => {
+const errorParser = (code: number, detail?: any): TErrorResponse => {
   const error: TApplicationError = appErrors[code];
 
   return {
     code: error.code,
-    message_code: error.message,
+    message: error.message,
+    ...(detail && { detail }),
   };
 };
 

@@ -1,6 +1,7 @@
 import {
   STATUS_HTTP_INTERNAL_SERVER_ERROR,
   STATUS_HTTP_BAD_REQUEST,
+  STATUS_HTTP_NOT_FOUND,
 } from '@utils/http-codes';
 
 export const ERR_APP_DEFAULT = 1000;
@@ -13,6 +14,10 @@ export const ERR_WRONG_ADMIN_ROLE = 1006;
 export const ERR_NO_KYC = 1007;
 export const ERR_EXTERNAL_SERVICE_DEFAULT = 1011;
 export const ERR_APP_INTERNAL_CONFIGURATION = 2000;
+
+export const ERR_APP_ENTITY_NOT_FOUND = 1300;
+
+export const ERR_APP_INVALID_PARAMS = 1201;
 
 export type TApplicationError = {
   code: number;
@@ -84,6 +89,18 @@ const baseErrors: TApplicationErrors = {
     code: 2000,
     message: 'internal_configuration',
     httpStatusCode: STATUS_HTTP_INTERNAL_SERVER_ERROR,
+    logSeverity: 'error',
+  },
+  1201: {
+    code: 1201,
+    message: 'invalid_params',
+    httpStatusCode: STATUS_HTTP_BAD_REQUEST,
+    logSeverity: 'error',
+  },
+  1300: {
+    code: 1300,
+    message: 'entity_not_found',
+    httpStatusCode: STATUS_HTTP_NOT_FOUND,
     logSeverity: 'error',
   },
 };

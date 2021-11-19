@@ -10,7 +10,6 @@ export default class UserRepository extends Repository<UserEntity> {
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
   async getById(id: string): Promise<UserEntity> {
-    console.log('================\n', 'id: ', id, '\n================');
     return this.createQueryBuilder('self')
       .where('self.id = :id', { id })
       .getOneOrFail();
