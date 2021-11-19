@@ -6,7 +6,7 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
     ports:
-      - "127.0.0.1:3210:5432"
+      - "127.0.0.1:4210:5432"
     env_file: ./env/.env.postgres
 
   # BACKEND
@@ -17,7 +17,7 @@ services:
     env_file:
       - ./env/.env.api
     ports:
-      - "127.0.0.1:3200:7000"
+      - "127.0.0.1:4200:7000"
     volumes:
       - ./api/src:/home/node/app/src
 
