@@ -12,3 +12,11 @@ export const getUsersRequest = {
     ...paginationDefaults,
   },
 };
+
+export const createUserRequest = {
+  body: {
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    password: yup.string().required(),
+  },
+};

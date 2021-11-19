@@ -21,6 +21,12 @@ RouterV1.get(
   UserController.getUser
 );
 
+RouterV1.post(
+  `${USER_ROUTE_BASE_PATH}`,
+  validate(UserRequest.createUserRequest),
+  UserController.createUser
+);
+
 const RECORD_ROUTE_BASE_PATH = '/records';
 RouterV1.get(
   `${RECORD_ROUTE_BASE_PATH}`,

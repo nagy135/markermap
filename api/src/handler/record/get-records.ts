@@ -1,4 +1,4 @@
-import { TRequestGetUsers } from '@ctypes/request';
+import { TRequestGetRecords } from '@ctypes/request';
 import { TPaginationResult, TPaginationOptions } from '@ctypes/other';
 import { getCustomRepository } from 'typeorm';
 import { getPaginatedResult } from '@utils/common';
@@ -6,7 +6,7 @@ import RecordRepository from '@repository/record.repository';
 import RecordEntity from '@entity/record.entity';
 
 export default async (
-  data: TRequestGetUsers
+  data: TRequestGetRecords
 ): Promise<TPaginationResult<RecordEntity>> => {
   const recordRepository = getCustomRepository(RecordRepository);
 

@@ -47,3 +47,25 @@ export const getUser = async (
     next(error);
   }
 };
+
+/**
+ * creates new user with hashed password
+ *
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const createUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | TApplicationError | undefined> => {
+  try {
+    const data = await UserHandler.createUser(req.body);
+
+    return res.status(STATUS_HTTP_OK).send({
+      status: RESPONSE_STATUS_OK,
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
