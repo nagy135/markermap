@@ -20,14 +20,22 @@ export default class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', name: 'first_name' })
-  firstName: string;
-
-  @Column({ type: 'varchar', name: 'last_name' })
-  lastName: string;
+  @Column({ type: 'varchar' })
+  nickname: string;
 
   @Column({ type: 'varchar' })
   password: string;
+
+  // optional metadata
+
+  @Column({ type: 'varchar', name: 'first_name', nullable: true })
+  firstName?: string;
+
+  @Column({ type: 'varchar', name: 'last_name', nullable: true })
+  lastName?: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  email?: string;
 
   // relations
 
