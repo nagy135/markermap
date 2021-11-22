@@ -19,6 +19,17 @@ export const compareHash = async (
   return bcrypt.compare(password, hash);
 };
 
+export const randomString = (length: number): string => {
+  let result = '';
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const ccharsLen = chars.length;
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * ccharsLen));
+  }
+  return result;
+};
+
 /**
  * Returns paginates result of passed in query builder
  * Generic over T: Entity
