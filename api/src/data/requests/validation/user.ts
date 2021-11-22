@@ -15,8 +15,9 @@ export const getUsersRequest = {
 
 export const createUserRequest = {
   body: {
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
+    firstName: yup.string().optional(),
+    lastName: yup.string().optional(),
+    nickname: yup.string().required(),
     password: yup.string().required(),
   },
 };

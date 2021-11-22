@@ -6,9 +6,10 @@ export type TRequestGetUsers = TPaginationOptions;
 export type TRequestGetUser = Record<string, string>;
 
 export type TRequestCreateUser = {
-  firstName: string;
-  lastName: string;
+  nickname: string;
   password: string;
+  firstName?: string;
+  lastName?: string;
 };
 // }}}
 
@@ -21,5 +22,15 @@ export type TRequestCreateRecord = {
   name: string;
   lat: string;
   lon: string;
+};
+// }}}
+
+// login {{{
+export type TRequestLogin = {
+  nickname: string;
+  password: string;
+};
+export type TRequestLogout = {
+  loginToken: string;
 };
 // }}}

@@ -27,7 +27,7 @@ export default class UserEntity extends BaseEntity {
   password: string;
 
   @Column({ type: 'varchar', nullable: true, select: false })
-  loginToken?: string; // simple login verification token sent with each "logged in request"
+  loginToken: string | null; // simple login verification token sent with each "logged in request"
 
   // optional metadata
 

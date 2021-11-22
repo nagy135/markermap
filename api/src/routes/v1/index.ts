@@ -5,13 +5,33 @@ const RouterV1 = Router();
 
 import * as UserController from '@controller/user.controller';
 import * as RecordController from '@controller/record.controller';
+import * as LoginController from '@controller/login.controller';
 
 import * as UserRequest from '@requests/validation/user';
 import * as RecordRequest from '@requests/validation/record';
+import * as LoginRequest from '@requests/validation/login';
+
+// login {{{
+
+const LOG_ROUTE_BASE_PATH = '/log';
+
+RouterV1.post(
+  `${LOG_ROUTE_BASE_PATH}/in`,
+  validate(LoginRequest.loginRequest),
+  LoginController.login
+);
+RouterV1.post(
+  `${LOG_ROUTE_BASE_PATH}/out`,
+  validate(LoginRequest.logoutRequest),
+  LoginController.logout
+);
+
+// }}}
 
 // users {{{
 
 const USER_ROUTE_BASE_PATH = '/users';
+
 RouterV1.get(
   `${USER_ROUTE_BASE_PATH}`,
   validate(UserRequest.getUsersRequest),
@@ -40,6 +60,7 @@ RouterV1.delete(
 // records {{{
 
 const RECORD_ROUTE_BASE_PATH = '/records';
+
 RouterV1.get(
   `${RECORD_ROUTE_BASE_PATH}`,
   validate(RecordRequest.getRecordsRequest),

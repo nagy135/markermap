@@ -16,6 +16,7 @@ export const ERR_EXTERNAL_SERVICE_DEFAULT = 1011;
 export const ERR_APP_INTERNAL_CONFIGURATION = 2000;
 
 export const ERR_APP_ENTITY_NOT_FOUND = 1300;
+export const ERR_APP_INCORRECT_PASSWORD = 1400;
 
 export const ERR_APP_INVALID_PARAMS = 1201;
 
@@ -101,6 +102,12 @@ const baseErrors: TApplicationErrors = {
     code: 1300,
     message: 'entity_not_found',
     httpStatusCode: STATUS_HTTP_NOT_FOUND,
+    logSeverity: 'error',
+  },
+  1400: {
+    code: 1400,
+    message: 'incorrect_password',
+    httpStatusCode: STATUS_HTTP_BAD_REQUEST,
     logSeverity: 'error',
   },
 };
