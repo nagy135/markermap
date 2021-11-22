@@ -20,11 +20,14 @@ export default class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', unique: true })
   nickname: string;
 
   @Column({ type: 'varchar' })
   password: string;
+
+  @Column({ type: 'varchar', nullable: true, select: false })
+  loginToken?: string; // simple login verification token sent with each "logged in request"
 
   // optional metadata
 
