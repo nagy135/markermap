@@ -34,3 +34,12 @@ export type TRequestLogout = {
   loginToken: string;
 };
 // }}}
+
+// image {{{
+export type TRequestUploadImage = {
+  recordId: string;
+};
+export type TRequestDeleteImage = {
+  imageId: string;
+};
+// }}}

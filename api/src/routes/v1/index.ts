@@ -6,10 +6,12 @@ const RouterV1 = Router();
 import * as UserController from '@controller/user.controller';
 import * as RecordController from '@controller/record.controller';
 import * as LoginController from '@controller/login.controller';
+import * as ImageController from '@controller/image.controller';
 
 import * as UserRequest from '@requests/validation/user';
 import * as RecordRequest from '@requests/validation/record';
 import * as LoginRequest from '@requests/validation/login';
+import * as ImageRequest from '@requests/validation/image';
 
 // login {{{
 
@@ -86,4 +88,21 @@ RouterV1.delete(
 
 // }}}
 
+// images {{{
+
+const IMAGE_ROUTE_BASE_PATH = '/images';
+
+RouterV1.post(
+  `${IMAGE_ROUTE_BASE_PATH}`,
+  validate(ImageRequest.uploadImageRequest),
+  ImageController.uploadImage
+);
+
+RouterV1.delete(
+  `${IMAGE_ROUTE_BASE_PATH}/:imageId`,
+  validate(ImageRequest.deleteImageRequest),
+  RecordController.deleteRecord
+);
+
+// }}}
 export default RouterV1;
