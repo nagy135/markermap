@@ -25,7 +25,7 @@ export const validate = (
   data: TValidationData,
   options: TValidationOptions = {}
 ) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, _res: Response, next: NextFunction) => {
     const validationSchema: Record<string, any> = {};
     for (const [key, value] of Object.entries(data)) {
       validationSchema[key] = yup.object().shape(value);

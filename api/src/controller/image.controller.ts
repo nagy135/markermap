@@ -15,7 +15,8 @@ export const uploadImage = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    await ImageHandler.uploadImage(req.body, req, res);
+    if (!Array.isArray(req.files))
+      await ImageHandler.uploadImage(req.body, req.files!.image[0]);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
