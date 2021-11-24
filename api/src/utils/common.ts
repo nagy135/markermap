@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import { BaseEntity, SelectQueryBuilder } from 'typeorm';
 import { TPaginationOptions, TPaginationResult } from '@ctypes/other';
+import multer from 'multer';
+import path from 'path';
 
 /**
  * @author Viktor Nagy <viktor.nagy@01people.com>

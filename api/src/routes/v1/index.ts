@@ -12,6 +12,7 @@ import * as UserRequest from '@requests/validation/user';
 import * as RecordRequest from '@requests/validation/record';
 import * as LoginRequest from '@requests/validation/login';
 import * as ImageRequest from '@requests/validation/image';
+import multerUploader from '@utils/multer-uploader';
 
 // login {{{
 
@@ -94,6 +95,7 @@ const IMAGE_ROUTE_BASE_PATH = '/images';
 
 RouterV1.post(
   `${IMAGE_ROUTE_BASE_PATH}`,
+  multerUploader.fields([{ name: 'image', maxCount: 1 }]),
   validate(ImageRequest.uploadImageRequest),
   ImageController.uploadImage
 );

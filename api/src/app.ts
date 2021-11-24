@@ -77,8 +77,9 @@ const corsOptions: any = {
 const createApplication = async () => {
   try {
     const app: Application = Express();
+    app.use(Express.static(__dirname + '/public'));
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(MorganInfoMiddleware);
     app.use(MorganErrorMiddleware);
     app.use(cors(corsOptions));
