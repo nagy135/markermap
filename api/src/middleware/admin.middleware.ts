@@ -4,7 +4,7 @@ import { ERR_WRONG_ADMIN_ROLE } from '@utils/app-errors';
 import AppException from '@exception/app.exception';
 
 export const adminMiddleware = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {
