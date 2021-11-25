@@ -5,7 +5,7 @@ module.exports = {
       script: 'src/index.ts',
       node_args: '-r tsconfig-paths/register -T',
       watch: true,
-      ignore_watch: ['node_modules', 'tests'],
+      ignore_watch: ['node_modules', 'tests', 'uploads'],
     },
   ],
 };
