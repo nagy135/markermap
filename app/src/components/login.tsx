@@ -1,46 +1,44 @@
-import * as React from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useRouter } from "next/router";
-import { useAuth } from "context/log";
+import Container from "@mui/material/Container";
+
+import { useSelector } from "react-redux";
+import { LogState } from "../store/logReducer";
 
 export default function Login(props: any) {
-  const { user, login, logout } = useAuth();
-  const router = useRouter();
+  const loggedUser = useSelector<LogState>((state) => state.loggedUser);
   return (
-    <Stack
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <h2>User: {user ? "login" : "logout"}</h2>
-
-      <TextField id="login" label="Login" />
-      <TextField
-        id="password"
-        label="Password"
-        type="password"
-        autoComplete="current-password"
-      />
-      <Button
-        style={{
-          margin: 8,
-          marginTop: 20,
+    <Container>
+      <h1>{loggedUser ? "logged in" : " not"}</h1>
+      <Stack
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
         }}
-        size="large"
-        color="info"
-        variant="contained"
-        onClick={() => {
-          login();
-          router.push("/map");
-        }}
+        noValidate
+        autoComplete="off"
       >
-        Log in
-      </Button>
-    </Stack>
+        <TextField id="login" label="Login" />
+        <TextField
+          id="password"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+        />
+        <Button
+          style={{
+            margin: 8,
+            marginTop: 20,
+          }}
+          size="large"
+          color="info"
+          variant="contained"
+          onClick={() => {}}
+        >
+          Log in
+        </Button>
+      </Stack>
+    </Container>
   );
 }
