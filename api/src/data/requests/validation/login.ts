@@ -7,6 +7,12 @@ export const loginRequest = {
   },
 };
 
+export const recoverRequest = {
+  body: {
+    loginToken: yup.string().required(),
+  },
+};
+
 export const logoutRequest = {
   body: {
     loginToken: yup.string().required(),

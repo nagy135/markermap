@@ -46,3 +46,24 @@ export const logout = async (
     next(error);
   }
 };
+
+/**
+ * recover login via loginToken
+ *
+ * @author Viktor Nagy <viktor.nagy@01people.com>
+ */
+export const recover = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | TApplicationError | undefined> => {
+  try {
+    await LoginHandler.recover(req.body);
+
+    return res.status(STATUS_HTTP_OK).send({
+      status: RESPONSE_STATUS_OK,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

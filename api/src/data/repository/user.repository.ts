@@ -4,6 +4,7 @@ import {
   TRequestCreateUser,
   TRequestLogin,
   TRequestLogout,
+  TRequestRecover,
 } from '@ctypes/request';
 import { hash, compareHash, randomString } from '@utils/common';
 import AppException from '@exception/app.exception';
@@ -39,6 +40,17 @@ export default class UserRepository extends Repository<UserEntity> {
     user.password = await hash(password);
 
     await user.save();
+  }
+
+  /**
+   * creates new user with hashed password
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  async recovery(data: TRequestRecover): Promise<void> {
+    const { loginToken } = data;
+
+    await this.findOneOrFail({ loginToken });
   }
 
   /**

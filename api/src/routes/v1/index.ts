@@ -24,6 +24,11 @@ RouterV1.post(
   LoginController.login
 );
 RouterV1.post(
+  `${LOG_ROUTE_BASE_PATH}/recover`,
+  validate(LoginRequest.recoverRequest),
+  LoginController.recover
+);
+RouterV1.post(
   `${LOG_ROUTE_BASE_PATH}/out`,
   validate(LoginRequest.logoutRequest),
   LoginController.logout

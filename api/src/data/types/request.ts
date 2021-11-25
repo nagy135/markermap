@@ -33,6 +33,9 @@ export type TRequestLogin = {
 export type TRequestLogout = {
   loginToken: string;
 };
+export type TRequestRecover = {
+  loginToken: string;
+};
 // }}}
 
 // image {{{
