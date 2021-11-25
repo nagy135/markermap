@@ -10,14 +10,23 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props: any) {
-  const loggedUser = useSelector<LogState>((state) => state.loggedUser);
+  const loggedUser = useSelector<LogState>(
+    (state) => state.loggedUser as string | null
+  );
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   useEffect(() => {
+    const login = localStorage.getItem("loggedUser");
+    if (login) {
+      dispatch({ type: "LOG_IN", payload: { login, password: "" } });
+    }
+  }, []);
+  useEffect(() => {
     if (loggedUser) {
+      localStorage.setItem("loggedUser", loggedUser as string);
       navigate("/map");
     }
   }, [loggedUser]);
