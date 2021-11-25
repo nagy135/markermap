@@ -12,6 +12,7 @@ export default class RecordRepository extends Repository<RecordEntity> {
   async getById(id: string): Promise<RecordEntity> {
     return this.createQueryBuilder('self')
       .where('self.id = :id', { id })
+      .leftJoinAndSelect('self.images', 'images')
       .getOneOrFail();
   }
 

@@ -1,11 +1,13 @@
 import { TRequestUploadImage } from '@ctypes/request';
-// import { getCustomRepository } from 'typeorm';
-// import RecordRepository from '@repository/record.repository';
+import { getCustomRepository } from 'typeorm';
+import ImageRepository from '@repository/image.repository';
 
 export default async (
   data: TRequestUploadImage,
   file?: Express.Multer.File
-) => {
-  console.log('================\n', 'data: ', data, '\n================');
-  console.log('================\n', 'FILE: ', file, '\n================');
+): Promise<void> => {
+  const imageRepository = getCustomRepository(ImageRepository);
+
+  if (file)
+    await imageRepository.make(file.originalname, file.filename, data.recordId);
 };
