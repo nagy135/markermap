@@ -14,7 +14,7 @@ export type TLoginResponse = {
 export const performLogIn = async (
   data: TLoginData
 ): Promise<TLoginResponse> => {
-  const endpoint = "localhost:4200/v1/log";
+  const endpoint = "http://localhost:4200/v1/log";
 
   if (data.loginToken)
     return (
@@ -25,7 +25,7 @@ export const performLogIn = async (
   else
     return (
       await axios.post(`${endpoint}/in`, {
-        login: data.login,
+        nickname: data.login,
         password: data.password,
       })
     ).data?.data;

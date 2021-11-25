@@ -22,6 +22,12 @@ export default function Login(props: any) {
   const navigate = useNavigate();
   useCallback(async () => {
     const loginToken = localStorage.getItem("loginToken");
+    console.log(
+      "================\n",
+      "loginToken: ",
+      loginToken,
+      "\n================"
+    );
     if (loginToken) {
       const { login } = await performLogIn({
         loginToken,
@@ -39,16 +45,12 @@ export default function Login(props: any) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const payload = {
-      login: login,
+      login,
+      password,
     };
     const { loginToken } = await performLogIn(payload);
-    console.log(
-      "================\n",
-      "loginToken: ",
-      loginToken,
-      "\n================"
-    );
     localStorage.setItem("loginToken", loginToken);
     dispatch({ type: "LOG_IN", payload });
   };
@@ -97,7 +99,6 @@ export default function Login(props: any) {
           size="large"
           color="info"
           variant="contained"
-          type="submit"
           onClick={handleSubmit}
         >
           Log in
