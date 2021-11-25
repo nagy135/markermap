@@ -5,13 +5,22 @@ import Box from "@mui/material/Box";
 
 import { useSelector, useDispatch } from "react-redux";
 import { LogState, TLoginPayload } from "../store/logReducer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 export default function Login(props: any) {
   const loggedUser = useSelector<LogState>((state) => state.loggedUser);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loggedUser) {
+      navigate("/map");
+    }
+  }, [loggedUser]);
 
   const dispatch = useDispatch();
 
