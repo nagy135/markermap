@@ -23,19 +23,14 @@ services:
 
   # FRONTEND
   app:
-    container_name: app
     build:
       context: ./app/
       dockerfile: ./dockerfile.develop
     volumes:
-      - ./app/src:/app/src
-      - ./app/public:/app/public
-      - ./app/assets:/app/assets
+      - ./app:/app
     ports:
       - "3300:3000"
     stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   database:
