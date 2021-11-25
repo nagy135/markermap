@@ -2,8 +2,8 @@ import { TRequestRecover } from '@ctypes/request';
 import { getCustomRepository } from 'typeorm';
 import UserRepository from '@repository/user.repository';
 
-export default async (data: TRequestRecover): Promise<void> => {
+export default async (data: TRequestRecover): Promise<TLoginResponse> => {
   const userRepository = getCustomRepository(UserRepository);
 
-  await userRepository.recovery(data);
+  return await userRepository.recovery(data);
 };

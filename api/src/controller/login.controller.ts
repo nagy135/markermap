@@ -58,10 +58,11 @@ export const recover = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    await LoginHandler.recover(req.body);
+    const data = await LoginHandler.recover(req.body);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
+      data,
     });
   } catch (error) {
     next(error);

@@ -4,8 +4,10 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import { useSelector, useDispatch } from "react-redux";
-import { LogState, TLoginPayload } from "../store/logReducer";
-import { useEffect, useState } from "react";
+import { LogState } from "../store/logReducer";
+import { useEffect, useState, useCallback } from "react";
+
+import { performLogIn } from "../utils/log";
 
 import { useNavigate } from "react-router-dom";
 
@@ -18,22 +20,36 @@ export default function Login(props: any) {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    const login = localStorage.getItem("loggedUser");
-    if (login) {
-      dispatch({ type: "LOG_IN", payload: { login, password: "" } });
+  useCallback(async () => {
+    const loginToken = localStorage.getItem("loginToken");
+    if (loginToken) {
+      const { login } = await performLogIn({
+        loginToken,
+      });
+      dispatch({ type: "LOG_IN", payload: { login } });
     }
   }, []);
+
   useEffect(() => {
     if (loggedUser) {
-      localStorage.setItem("loggedUser", loggedUser as string);
       navigate("/map");
     }
   }, [loggedUser]);
 
   const dispatch = useDispatch();
 
-  const logIn = (payload: TLoginPayload) => {
+  const handleSubmit = async (e: any) => {
+    const payload = {
+      login: login,
+    };
+    const { loginToken } = await performLogIn(payload);
+    console.log(
+      "================\n",
+      "loginToken: ",
+      loginToken,
+      "\n================"
+    );
+    localStorage.setItem("loginToken", loginToken);
     dispatch({ type: "LOG_IN", payload });
   };
 
@@ -81,7 +97,8 @@ export default function Login(props: any) {
           size="large"
           color="info"
           variant="contained"
-          onClick={() => logIn({ login, password })}
+          type="submit"
+          onClick={handleSubmit}
         >
           Log in
         </Button>

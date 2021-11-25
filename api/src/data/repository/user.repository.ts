@@ -47,10 +47,14 @@ export default class UserRepository extends Repository<UserEntity> {
    *
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
-  async recovery(data: TRequestRecover): Promise<void> {
+  async recovery(data: TRequestRecover): Promise<TLoginResponse> {
     const { loginToken } = data;
 
-    await this.findOneOrFail({ loginToken });
+    const user = await this.findOneOrFail({ loginToken });
+    return {
+      login: user.nickname,
+      loginToken,
+    };
   }
 
   /**
@@ -67,7 +71,7 @@ export default class UserRepository extends Repository<UserEntity> {
    *
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
-  async login(data: TRequestLogin): Promise<string> {
+  async login(data: TRequestLogin): Promise<TLoginResponse> {
     const { nickname, password } = data;
 
     const user = await this.findOneOrFail({ nickname });
@@ -80,7 +84,10 @@ export default class UserRepository extends Repository<UserEntity> {
     user.loginToken = loginToken;
     await user.save();
 
-    return loginToken;
+    return {
+      login: user.nickname,
+      loginToken,
+    };
   }
 
   /**

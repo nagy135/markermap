@@ -8,7 +8,6 @@ const initialState = {
 
 export type TLoginPayload = {
   login: string;
-  password: string;
 };
 
 export const LOG_IN = "LOG_IN";
