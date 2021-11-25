@@ -1,16 +1,34 @@
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
-import { useSelector } from "react-redux";
-import { LogState } from "../store/logReducer";
+import { useSelector, useDispatch } from "react-redux";
+import { LogState, TLoginPayload } from "../store/logReducer";
+import { useState } from "react";
 
 export default function Login(props: any) {
   const loggedUser = useSelector<LogState>((state) => state.loggedUser);
+
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const logIn = (payload: TLoginPayload) => {
+    dispatch({ type: "LOG_IN", payload });
+  };
+
   return (
-    <Container>
-      <h1>{loggedUser ? "logged in" : " not"}</h1>
+    <Box
+      style={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <h1>{loggedUser ? "user is " + loggedUser : " not"}</h1>
       <Stack
         component="form"
         sx={{
@@ -19,11 +37,22 @@ export default function Login(props: any) {
         noValidate
         autoComplete="off"
       >
-        <TextField id="login" label="Login" />
+        <TextField
+          id="login"
+          value={login}
+          onChange={(e) => {
+            setLogin(e.target.value);
+          }}
+          label="Login"
+        />
         <TextField
           id="password"
           label="Password"
           type="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           autoComplete="current-password"
         />
         <Button
@@ -34,11 +63,11 @@ export default function Login(props: any) {
           size="large"
           color="info"
           variant="contained"
-          onClick={() => {}}
+          onClick={() => logIn({ login, password })}
         >
           Log in
         </Button>
       </Stack>
-    </Container>
+    </Box>
   );
 }
