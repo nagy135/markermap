@@ -21,7 +21,10 @@ export default function Login(props: any) {
         autoComplete="current-password"
       />
       <Button
-        style={{ margin: 8, marginTop: 20 }}
+        style={{
+          margin: 8,
+          marginTop: 20,
+        }}
         size="large"
         color="info"
         variant="contained"
