@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { performLogIn } from "../utils/log";
 
 import { useNavigate } from "react-router-dom";
+import useMapLogin from "../hooks/useMapLogin";
 
 export default function Login(props: any) {
   const navigate = useNavigate();
@@ -22,17 +23,7 @@ export default function Login(props: any) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      const loginToken = localStorage.getItem("loginToken");
-      if (loginToken) {
-        const response = await performLogIn({
-          loginToken,
-        });
-        dispatch({ type: "LOG_IN", payload: { userId: response.id } });
-      }
-    })();
-  }, []);
+  useMapLogin();
 
   useEffect(() => {
     if (userId) {

@@ -5,8 +5,9 @@ import { LogState } from "../store/logReducer";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { performLogIn } from "../utils/log";
 import { slovakiaCenter } from "../utils/constants";
+import useMapLogin from "../hooks/useMapLogin";
+import { getRecords, TRecordResponse } from "../utils/record";
 
 export default function Map(props: any) {
   const dispatch = useDispatch();
@@ -15,17 +16,7 @@ export default function Map(props: any) {
   const userId = useSelector<LogState>(
     (state) => state.userId as string | null
   );
-  useEffect(() => {
-    (async () => {
-      const loginToken = localStorage.getItem("loginToken");
-      if (loginToken) {
-        const response = await performLogIn({
-          loginToken,
-        });
-        dispatch({ type: "LOG_IN", payload: { userId: response.id } });
-      }
-    })();
-  }, []);
+  useMapLogin();
 
   const logOut = () => {
     localStorage.removeItem("loginToken");
@@ -33,7 +24,8 @@ export default function Map(props: any) {
     navigate("/");
   };
 
-  const [mapInstance, setMapInstance] = useState(null);
+  const [mapInstance, setMapInstance] = useState<google.maps.Map>();
+  const [visited, setVisited] = useState<TRecordResponse[]>([]);
 
   const defaultProps = {
     center: {
@@ -43,31 +35,42 @@ export default function Map(props: any) {
     zoom: 8,
   };
 
-  const visited = [
-    {
-      id: 0,
-      name: "Sitno",
-      lat: 48.402543576540275,
-      lng: 18.877049945323773,
-      altitude: 1009,
-    },
-  ];
+  useEffect(() => {
+    (async () => {
+      const records = await getRecords();
+      console.log(
+        "================\n",
+        "records: ",
+        records,
+        "\n================"
+      );
+      setVisited(records);
+    })();
+  }, []);
 
-  const renderMarkers = (map: any, maps: any) => {
-    setMapInstance(map);
+  const storeInstance = (map: any) => setMapInstance(map);
 
-    let newMarkers: any[] = [];
+  useEffect(() => {
+    if (!visited) return;
     visited.map((item) => {
-      const marker = new maps.Marker({
-        position: { lat: item.lat, lng: item.lng },
-        map,
-        altitude: item.altitude,
-        title: item.name + " (" + item.altitude + "m. n. m.)",
+      if (!mapInstance) return;
+      const altitude = 1000;
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(item.lat, item.lon),
+        title: item.name + " (" + altitude + "m. n. m.)",
         label: item.name,
       });
+      console.log(
+        "================\n",
+        "marker: ",
+        marker,
+        "\n================"
+      );
+      marker.setMap(mapInstance);
       marker.addListener("click", () => {
-        map.setCenter(marker.getPosition());
-        props.markerClicked();
+        const position = marker.getPosition();
+        if (position) mapInstance.setCenter(position);
+        // props.markerClicked();
         // dispatch(
         //   change({
         //     name: item.name,
@@ -78,10 +81,8 @@ export default function Map(props: any) {
         //   })
         // );
       });
-      newMarkers.push(marker);
     });
-    // setMarkers(newMarkers);
-  };
+  }, [visited]);
 
   return (
     <>
@@ -110,7 +111,7 @@ export default function Map(props: any) {
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
+          onGoogleApiLoaded={({ map }) => storeInstance(map)}
           // layerTypes={['TransitLayer', 'TrafficLayer']}
           options={() => {
             return {
