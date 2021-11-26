@@ -51,21 +51,13 @@ export default function Map(props: any) {
   const storeInstance = (map: any) => setMapInstance(map);
 
   useEffect(() => {
-    if (!visited) return;
+    if (!visited || !mapInstance) return;
     visited.map((item) => {
-      if (!mapInstance) return;
-      const altitude = 1000;
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(item.lat, item.lon),
-        title: item.name + " (" + altitude + "m. n. m.)",
+        title: item.name + " (" + item.altitude + "m. n. m.)",
         label: item.name,
       });
-      console.log(
-        "================\n",
-        "marker: ",
-        marker,
-        "\n================"
-      );
       marker.setMap(mapInstance);
       marker.addListener("click", () => {
         const position = marker.getPosition();
@@ -82,7 +74,7 @@ export default function Map(props: any) {
         // );
       });
     });
-  }, [visited]);
+  }, [visited, mapInstance]);
 
   return (
     <>
