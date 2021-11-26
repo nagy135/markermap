@@ -52,6 +52,7 @@ export default class UserRepository extends Repository<UserEntity> {
 
     const user = await this.findOneOrFail({ loginToken });
     return {
+      id: user.id,
       login: user.nickname,
       loginToken,
     };
@@ -85,6 +86,7 @@ export default class UserRepository extends Repository<UserEntity> {
     await user.save();
 
     return {
+      id: user.id,
       login: user.nickname,
       loginToken,
     };
