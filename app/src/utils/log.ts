@@ -7,6 +7,7 @@ export type TLoginData = {
 };
 
 export type TLoginResponse = {
+  id: string;
   login: string;
   loginToken: string;
 };

@@ -1,13 +1,13 @@
 export interface LogState {
-  loggedUser: string | null;
+  userId: string | null;
 }
 
 const initialState = {
-  loggedUser: null,
+  userId: null,
 };
 
 export type TLoginPayload = {
-  login: string;
+  userId: string;
 };
 
 export const LOG_IN = "LOG_IN";
@@ -19,12 +19,12 @@ export const logReducer = (state: LogState = initialState, action: Action) => {
   switch (action.type) {
     case "LOG_IN": {
       return {
-        loggedUser: action.payload.login,
+        userId: action.payload.userId,
       };
     }
     case "LOG_OUT": {
       return {
-        loggedUser: null,
+        userId: null,
       };
     }
     default:
