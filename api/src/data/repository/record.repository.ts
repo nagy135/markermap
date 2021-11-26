@@ -22,13 +22,14 @@ export default class RecordRepository extends Repository<RecordEntity> {
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
   async make(data: TRequestCreateRecord): Promise<void> {
-    const { name, lat, lon } = data;
+    const { name, lat, lon, altitude } = data;
 
     const record = new RecordEntity();
 
     record.name = name;
     record.lat = lat;
     record.lon = lon;
+    record.altitude = altitude;
 
     await record.save();
   }

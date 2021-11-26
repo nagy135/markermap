@@ -33,6 +33,9 @@ export default class RecordEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   lon: string;
 
+  @Column({ type: 'numeric' })
+  altitude: number;
+
   // relations
 
   @ManyToOne(() => UserEntity, (user: UserEntity) => user.id)

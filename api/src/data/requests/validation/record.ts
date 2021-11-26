@@ -18,6 +18,7 @@ export const createRecordRequest = {
     name: yup.string().required(),
     lat: yup.string().required(),
     lon: yup.string().required(),
+    altitude: yup.number().required(),
   },
 };
 

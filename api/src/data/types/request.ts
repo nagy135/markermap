@@ -22,6 +22,7 @@ export type TRequestCreateRecord = {
   name: string;
   lat: string;
   lon: string;
+  altitude: number;
 };
 // }}}
 
