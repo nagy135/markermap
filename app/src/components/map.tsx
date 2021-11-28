@@ -26,6 +26,7 @@ export default function Map(props: any) {
 
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
   const [visited, setVisited] = useState<TRecordResponse[]>([]);
+  const shownRecords: Record<string, google.maps.Marker> = {};
 
   const defaultProps = {
     center: {
@@ -38,12 +39,6 @@ export default function Map(props: any) {
   useEffect(() => {
     (async () => {
       const records = await getRecords();
-      console.log(
-        "================\n",
-        "records: ",
-        records,
-        "\n================"
-      );
       setVisited(records);
     })();
   }, []);
@@ -52,28 +47,32 @@ export default function Map(props: any) {
 
   useEffect(() => {
     if (!visited || !mapInstance) return;
-    visited.map((item) => {
-      const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(item.lat, item.lon),
-        title: item.name + " (" + item.altitude + "m. n. m.)",
-        label: item.name,
+    visited
+      .filter((item) => !(item.id in shownRecords))
+      .map((item) => {
+        const marker = new google.maps.Marker({
+          position: new google.maps.LatLng(item.lat, item.lon),
+          title: item.name + " (" + item.altitude + "m. n. m.)",
+          label: item.name,
+        });
+        shownRecords[item.id] = marker;
+
+        marker.setMap(mapInstance);
+        marker.addListener("click", () => {
+          const position = marker.getPosition();
+          if (position) mapInstance.setCenter(position);
+          // props.markerClicked();
+          // dispatch(
+          //   change({
+          //     name: item.name,
+          //     lat: item.lat,
+          //     lng: item.lng,
+          //     altitude: item.altitude,
+          //     images: visited[item.id].images,
+          //   })
+          // );
+        });
       });
-      marker.setMap(mapInstance);
-      marker.addListener("click", () => {
-        const position = marker.getPosition();
-        if (position) mapInstance.setCenter(position);
-        // props.markerClicked();
-        // dispatch(
-        //   change({
-        //     name: item.name,
-        //     lat: item.lat,
-        //     lng: item.lng,
-        //     altitude: item.altitude,
-        //     images: visited[item.id].images,
-        //   })
-        // );
-      });
-    });
   }, [visited, mapInstance]);
 
   return (
