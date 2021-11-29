@@ -5,7 +5,7 @@ import { LogState } from "../store/logReducer";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { slovakiaCenter } from "../utils/constants";
+import { defaultMapCenter, defaultZoom } from "../utils/constants";
 import useMapLogin from "../hooks/useMapLogin";
 import { getRecords, TRecordResponse } from "../utils/record";
 
@@ -28,14 +28,6 @@ export default function Map(props: any) {
   const [visited, setVisited] = useState<TRecordResponse[]>([]);
   const shownRecords: Record<string, google.maps.Marker> = {};
 
-  const defaultProps = {
-    center: {
-      lat: slovakiaCenter.lat,
-      lng: slovakiaCenter.lng,
-    },
-    zoom: 8,
-  };
-
   useEffect(() => {
     (async () => {
       const records = await getRecords();
@@ -43,7 +35,7 @@ export default function Map(props: any) {
     })();
   }, []);
 
-  const storeInstance = (map: any) => setMapInstance(map);
+  const storeInstance = (map: google.maps.Map) => setMapInstance(map);
 
   useEffect(() => {
     if (!visited || !mapInstance) return;
@@ -99,8 +91,8 @@ export default function Map(props: any) {
             key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&",
             v: "beta",
           }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
+          defaultCenter={defaultMapCenter}
+          defaultZoom={defaultZoom}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map }) => storeInstance(map)}
           // layerTypes={['TransitLayer', 'TrafficLayer']}
