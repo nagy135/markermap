@@ -9,14 +9,15 @@ import useMapLogin from "../hooks/useMapLogin";
 import { getRecords, TRecordResponse } from "../utils/record";
 import { toast } from "../utils/toast";
 import { TRootStore } from "../store";
+import Detail from "./detail";
 
 export default function Map(props: any) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userId = useSelector((state: TRootStore) => state.log.userId);
-  const selectedMarker = useSelector(
-    (state: TRootStore) => state.map.selectedMarker
+  const selectedRecord = useSelector(
+    (state: TRootStore) => state.map.selectedRecord
   );
   useMapLogin();
 
@@ -41,16 +42,17 @@ export default function Map(props: any) {
   }, []);
 
   useEffect(() => {
-    if (!selectedMarker || !(selectedMarker in shownRecords)) return;
-    const marker = shownRecords[selectedMarker];
+    if (!selectedRecord || !(selectedRecord.id in shownRecords)) return;
+    const marker = shownRecords[selectedRecord.id];
     const position = marker.getPosition();
     if (position && mapInstance) mapInstance.setCenter(position);
-  }, [selectedMarker, shownRecords]);
+  }, [selectedRecord, shownRecords]);
 
   const storeInstance = (map: google.maps.Map) => setMapInstance(map);
 
   useEffect(() => {
     if (!visited || !mapInstance) return;
+    const newRecords: Record<string, google.maps.Marker> = {};
     visited
       .filter((item) => !(item.id in shownRecords))
       .map((item) => {
@@ -59,21 +61,23 @@ export default function Map(props: any) {
           title: item.name + " (" + item.altitude + "m. n. m.)",
           label: item.name,
         });
-        setShownRecords({
-          ...shownRecords,
-          [item.id]: marker,
-        });
 
         marker.setMap(mapInstance);
+        newRecords[item.id] = marker;
         marker.addListener("click", () => {
           dispatch({
             type: "SELECT",
             payload: {
-              selectedMarker: item.id,
+              selectedRecord: item,
             },
           });
         });
       });
+
+    setShownRecords({
+      ...shownRecords,
+      ...newRecords,
+    });
   }, [visited, mapInstance]);
 
   return (
@@ -95,6 +99,7 @@ export default function Map(props: any) {
         Log OUT
       </Button>
       <div style={{ height: "100vh", width: "100%" }}>
+        <Detail />
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&",

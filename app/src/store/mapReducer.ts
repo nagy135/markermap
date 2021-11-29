@@ -1,11 +1,13 @@
+import { TRecordResponse } from "../utils/record";
+
 export interface MapState {
-  selectedMarker?: string;
+  selectedRecord?: TRecordResponse;
 }
 
 const initialState = {};
 
 export type TLoginPayload = {
-  selectedMarker?: string;
+  selectedRecord?: TRecordResponse;
 };
 
 type TSelectAction = {
@@ -30,13 +32,13 @@ export const mapReducer = (
     case "SELECT": {
       return {
         ...state,
-        selectedMarker: action.payload.selectedMarker,
+        selectedRecord: action.payload.selectedRecord,
       };
     }
     case "DESELECT": {
       return {
         ...state,
-        selectedMarker: undefined,
+        selectedRecord: undefined,
       };
     }
     default:
