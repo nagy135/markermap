@@ -10,8 +10,8 @@ export const toast = (
   let primary, secondary, icon;
   switch (toastType) {
     case "success":
-      primary = "#f9dc2b";
-      secondary = "#19a85b";
+      primary = "#19a85b";
+      secondary = "#ffffff";
       icon = "✓";
       break;
     case "warning":
