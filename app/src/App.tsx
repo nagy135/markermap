@@ -4,6 +4,7 @@ import "./App.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/map" element={<Map />} />
         </Routes>
       </Router>
+      <Toaster />
     </Provider>
   );
 }

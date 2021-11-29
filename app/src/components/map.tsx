@@ -1,13 +1,14 @@
 import GoogleMapReact from "google-map-react";
-
 import { useDispatch, useSelector } from "react-redux";
-import { LogState } from "../store/logReducer";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+
 import { defaultMapCenter, defaultZoom } from "../utils/constants";
 import useMapLogin from "../hooks/useMapLogin";
 import { getRecords, TRecordResponse } from "../utils/record";
+import { LogState } from "../store/logReducer";
+import { toast } from "../utils/toast";
 
 export default function Map(props: any) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function Map(props: any) {
   useEffect(() => {
     (async () => {
       const records = await getRecords();
+      toast("Records loaded");
       setVisited(records);
     })();
   }, []);
