@@ -7,15 +7,16 @@ import Button from "@mui/material/Button";
 import { defaultMapCenter, defaultZoom } from "../utils/constants";
 import useMapLogin from "../hooks/useMapLogin";
 import { getRecords, TRecordResponse } from "../utils/record";
-import { LogState } from "../store/logReducer";
 import { toast } from "../utils/toast";
+import { TRootStore } from "../store";
 
 export default function Map(props: any) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = useSelector<LogState>(
-    (state) => state.userId as string | null
+  const userId = useSelector((state: TRootStore) => state.log.userId);
+  const selectedMarker = useSelector(
+    (state: TRootStore) => state.map.selectedMarker
   );
   useMapLogin();
 
@@ -27,7 +28,9 @@ export default function Map(props: any) {
 
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
   const [visited, setVisited] = useState<TRecordResponse[]>([]);
-  const shownRecords: Record<string, google.maps.Marker> = {};
+  const [shownRecords, setShownRecords] = useState<
+    Record<string, google.maps.Marker>
+  >({});
 
   useEffect(() => {
     (async () => {
@@ -36,6 +39,13 @@ export default function Map(props: any) {
       setVisited(records);
     })();
   }, []);
+
+  useEffect(() => {
+    if (!selectedMarker || !(selectedMarker in shownRecords)) return;
+    const marker = shownRecords[selectedMarker];
+    const position = marker.getPosition();
+    if (position && mapInstance) mapInstance.setCenter(position);
+  }, [selectedMarker, shownRecords]);
 
   const storeInstance = (map: google.maps.Map) => setMapInstance(map);
 
@@ -49,22 +59,19 @@ export default function Map(props: any) {
           title: item.name + " (" + item.altitude + "m. n. m.)",
           label: item.name,
         });
-        shownRecords[item.id] = marker;
+        setShownRecords({
+          ...shownRecords,
+          [item.id]: marker,
+        });
 
         marker.setMap(mapInstance);
         marker.addListener("click", () => {
-          const position = marker.getPosition();
-          if (position) mapInstance.setCenter(position);
-          // props.markerClicked();
-          // dispatch(
-          //   change({
-          //     name: item.name,
-          //     lat: item.lat,
-          //     lng: item.lng,
-          //     altitude: item.altitude,
-          //     images: visited[item.id].images,
-          //   })
-          // );
+          dispatch({
+            type: "SELECT",
+            payload: {
+              selectedMarker: item.id,
+            },
+          });
         });
       });
   }, [visited, mapInstance]);
