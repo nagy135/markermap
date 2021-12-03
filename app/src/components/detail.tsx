@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { TRootStore } from "../store";
 import React from "react";
 import { Box, Drawer, Stack, TextField } from "@mui/material";
+import { API_ENDPOINT } from "../utils/constants";
 
 export default function Detail(props: any) {
   const dispatch = useDispatch();
@@ -71,6 +72,11 @@ export default function Detail(props: any) {
                   readOnly: true,
                 }}
               />
+              <div>
+                {selectedRecord.images.map((image) => (
+                  <a href={`${API_ENDPOINT}/${image.path}`}>{image.name}</a>
+                ))}
+              </div>
             </Stack>
           </Box>
         ) : (

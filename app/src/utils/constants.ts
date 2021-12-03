@@ -4,3 +4,5 @@ export const defaultMapCenter = {
 };
 
 export const defaultZoom = 8;
+
+export const API_ENDPOINT = "http://localhost:4200";
