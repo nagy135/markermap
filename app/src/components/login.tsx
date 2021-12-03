@@ -4,21 +4,19 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import { useSelector, useDispatch } from "react-redux";
-import { LogState } from "../store/logReducer";
 import { useEffect, useState } from "react";
 
 import { performLogIn } from "../utils/log";
 
 import { useNavigate } from "react-router-dom";
 import useMapLogin from "../hooks/useMapLogin";
+import { TRootStore } from "../store";
 
 export default function Login(props: any) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userId = useSelector<LogState>(
-    (state) => state.userId as string | null
-  );
+  const userId = useSelector((state: TRootStore) => state.log.userId);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");

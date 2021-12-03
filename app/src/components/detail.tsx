@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 import { TRootStore } from "../store";
 import React from "react";
-import { Drawer } from "@mui/material";
+import { Box, Drawer, Stack, TextField } from "@mui/material";
 
 export default function Detail(props: any) {
   const dispatch = useDispatch();
@@ -32,7 +32,50 @@ export default function Detail(props: any) {
         onClose={close()}
       >
         <Button onClick={close()}>close</Button>
-        {selectedRecord ? <div>{selectedRecord.id}</div> : <div>NONE</div>}
+        {selectedRecord ? (
+          <Box style={{ margin: 10 }}>
+            <Stack spacing={2}>
+              <TextField
+                id="outlined-read-only-input"
+                label="Name"
+                defaultValue=""
+                value={selectedRecord.name}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <TextField
+                id="outlined-read-only-input"
+                label="Latitude"
+                defaultValue=""
+                value={selectedRecord.lat}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <TextField
+                id="outlined-read-only-input"
+                label="Longitude"
+                defaultValue=""
+                value={selectedRecord.lon}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <TextField
+                id="outlined-read-only-input"
+                label="Altitude"
+                defaultValue=""
+                value={selectedRecord.altitude}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </Stack>
+          </Box>
+        ) : (
+          <div>NONE</div>
+        )}
       </Drawer>
     </React.Fragment>
   );
