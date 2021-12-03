@@ -5,6 +5,7 @@ import { TRootStore } from "../store";
 import React from "react";
 import { Box, Drawer, Stack, TextField } from "@mui/material";
 import { API_ENDPOINT } from "../utils/constants";
+import Images from "./images";
 
 export default function Detail(props: any) {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ export default function Detail(props: any) {
           <div>NONE</div>
         )}
       </Drawer>
+      <Images open={true} />
     </React.Fragment>
   );
 }
