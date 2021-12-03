@@ -17,7 +17,9 @@ export default async (
   };
 
   const paginatedResult = await getPaginatedResult(
-    recordRepository.createQueryBuilder('self'),
+    recordRepository
+      .createQueryBuilder('self')
+      .leftJoinAndSelect('self.images', 'images'),
     paginationOptions as TPaginationOptions,
     data
   );
