@@ -9420,6 +9420,11 @@ react-lite-toast@^1.0.9:
   resolved "https://registry.yarnpkg.com/react-lite-toast/-/react-lite-toast-1.0.9.tgz#2c9b20dad9d36ec9c202191355a530255ccb1dcd"
   integrity sha512-KCjfDepeIqqvP1l4LEazp3yThUR80D/Mom2Ec4HgzbuOmAdjuzgAqCVzQ0L9H+MVJ0S/uT7GFPWGFFtimBb9Lw==
 
+react-multi-carousel@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/react-multi-carousel/-/react-multi-carousel-2.6.5.tgz#faeceb697b138c7a1c403c58ddc5f33cfc19b3f2"
+  integrity sha512-i5iuAm5XRT/h7uBL9/pGWeRsQXzqvjBrPVP1sobKgDKEvfZuKFpYp/alaQhTRM56Jtkb8jZpSqLn52Ku6jJbDg==
+
 react-redux@^7.2.6:
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.6.tgz#49633a24fe552b5f9caf58feb8a138936ddfe9aa"
