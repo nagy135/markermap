@@ -108,7 +108,7 @@ RouterV1.post(
 RouterV1.delete(
   `${IMAGE_ROUTE_BASE_PATH}/:imageId`,
   validate(ImageRequest.deleteImageRequest),
-  RecordController.deleteRecord
+  ImageController.deleteImage
 );
 
 // }}}

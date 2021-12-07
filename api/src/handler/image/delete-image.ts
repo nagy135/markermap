@@ -1,6 +1,8 @@
-// import { getCustomRepository } from 'typeorm';
-// import RecordRepository from '@repository/record.repository';
+import ImageRepository from '@repository/image.repository';
+import { getCustomRepository } from 'typeorm';
 
 export default async (id: string): Promise<void> => {
-  console.log('================\n', 'id: ', id, '\n================');
+  const recordRepository = getCustomRepository(ImageRepository);
+
+  await recordRepository.deleteById(id);
 };
