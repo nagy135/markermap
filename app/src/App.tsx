@@ -1,5 +1,6 @@
 import Login from "./components/login";
 import Map from "./components/map";
+import Adder from "./components/adder";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/add" element={<Adder />} />
         </Routes>
       </Router>
       <Toaster />

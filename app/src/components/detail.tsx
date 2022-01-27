@@ -4,10 +4,9 @@ import Button from "@mui/material/Button";
 import { TRootStore } from "../store";
 import { useState } from "react";
 import { Box, Drawer, Stack, TextField } from "@mui/material";
-import { API_ENDPOINT } from "../utils/constants";
 import Images from "./images";
 
-export default function Detail(props: any) {
+export default function Detail(_props: any) {
   const dispatch = useDispatch();
   const [imagesOpen, setImagesOpen] = useState(false);
   const selectedRecord = useSelector(
