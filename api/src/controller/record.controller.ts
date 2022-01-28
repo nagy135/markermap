@@ -59,10 +59,13 @@ export const createRecord = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    await RecordHandler.createRecord(req.body);
+    const recordId = await RecordHandler.createRecord(req.body);
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
+      data: {
+        recordId,
+      },
     });
   } catch (error) {
     next(error);

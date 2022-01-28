@@ -21,7 +21,7 @@ export default class RecordRepository extends Repository<RecordEntity> {
    *
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
-  async make(data: TRequestCreateRecord): Promise<void> {
+  async make(data: TRequestCreateRecord): Promise<string> {
     const { name, lat, lon, altitude } = data;
 
     const record = new RecordEntity();
@@ -32,6 +32,7 @@ export default class RecordRepository extends Repository<RecordEntity> {
     record.altitude = altitude;
 
     await record.save();
+    return record.id;
   }
 
   /**
