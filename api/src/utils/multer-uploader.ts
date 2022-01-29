@@ -6,17 +6,16 @@ const IMAGE_MAX_SIZE = 8389000;
 
 export const UPLOAD_DIRECTORY = 'uploads/';
 
+export const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif'];
+
 const multerFileFilter: any = (_req: Request, file: any, callback: any) => {
   const ext: string = path.extname(file.originalname);
   if (
     file &&
-    ext !== '.png' &&
-    ext !== '.jpg' &&
-    ext !== '.gif' &&
-    ext !== '.jpeg' &&
+    !ALLOWED_EXTENSIONS.includes(ext) &&
     file.mimetype.slice(0, 5) !== 'image'
   ) {
-    throw Error();
+    throw Error(`invalid file type, supports only: ${ALLOWED_EXTENSIONS}`);
   }
   callback(null, true);
 };
