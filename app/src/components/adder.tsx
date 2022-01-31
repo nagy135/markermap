@@ -1,7 +1,9 @@
+import { Box, Button, Container, Input } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import useMapLogin from "../hooks/useMapLogin";
+import "./css/adder.css";
 
 import { TRootStore } from "../store";
 
@@ -34,27 +36,18 @@ export default function Detail(_props: any) {
     }
   };
   const onFileChange = (event: any) => {
-    // Update the state
     setUploadedFile({ selectedFile: event.target.files[0] });
   };
 
-  // On file upload (click the upload button)
   const onFileUpload = async () => {
-    // Create an object of formData
     const formData = new FormData();
 
-    // Update the formData object
     formData.append(
       "image", // NOTE: REQUIRED FORM DATA NAME! validated at api
       uploadedFile.selectedFile,
       uploadedFile.selectedFile.name
     );
 
-    // Details of the uploaded file
-    console.log(uploadedFile.selectedFile);
-
-    // Request made to the backend api
-    // Send formData object
     const endpoint = "http://localhost:4200/v1";
 
     const recordUploadResponse = (
@@ -66,24 +59,8 @@ export default function Detail(_props: any) {
         altitude: 2200,
       })
     ).data?.data;
-    console.log(
-      "================\n",
-      "recordUploadResponse: ",
-      recordUploadResponse,
-      "\n================"
-    );
 
-    formData.append(
-      "recordId", // NOTE: REQUIRED FORM DATA NAME! validated at api
-      recordUploadResponse.recordId
-    );
-
-    console.log(
-      "================\n",
-      "UPLOADING image ! formData: ",
-      formData,
-      "\n================"
-    );
+    formData.append("recordId", recordUploadResponse.recordId);
 
     const imageUploadResponse = await axios.post(
       `${endpoint}/images`,
@@ -98,14 +75,15 @@ export default function Detail(_props: any) {
   };
 
   return (
-    <div>
-      <h1>GeeksforGeeks</h1>
-      <h3>File Upload using React!</h3>
-      <div>
-        <input type="file" onChange={onFileChange} />
-        <button onClick={onFileUpload}>Upload!</button>
-      </div>
+    <Container>
+      <h1>Create New Record</h1>
+      <Box className="create-record">
+        <Input type="file" onChange={onFileChange} />
+        <Button sx={{ ml: 2 }} variant="contained" onClick={onFileUpload}>
+          Upload!
+        </Button>
+      </Box>
       {fileData()}
-    </div>
+    </Container>
   );
 }

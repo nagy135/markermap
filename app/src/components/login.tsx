@@ -11,7 +11,7 @@ import { performLogIn } from "../utils/log";
 import { useNavigate } from "react-router-dom";
 import { TRootStore } from "../store";
 
-export default function Login(props: any) {
+export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
