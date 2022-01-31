@@ -1,4 +1,4 @@
-import { Box, Button, Container, Input } from "@mui/material";
+import { Box, Button, Container, Input, Stack, TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -12,6 +12,7 @@ export default function Detail(_props: any) {
   const userId = useSelector((state: TRootStore) => state.log.userId);
 
   const [uploadedFile, setUploadedFile] = useState<any>({});
+  const [recordName, _] = useState("");
 
   const fileData = () => {
     if (uploadedFile) {
@@ -78,10 +79,13 @@ export default function Detail(_props: any) {
     <Container>
       <h1>Create New Record</h1>
       <Box className="create-record">
-        <Input type="file" onChange={onFileChange} />
-        <Button sx={{ ml: 2 }} variant="contained" onClick={onFileUpload}>
-          Upload!
-        </Button>
+        <Stack spacing={2}>
+          <Input type="file" onChange={onFileChange} />
+          <TextField label="Name" value={recordName} />
+          <Button variant="contained" onClick={onFileUpload}>
+            Upload
+          </Button>
+        </Stack>
       </Box>
       {fileData()}
     </Container>
