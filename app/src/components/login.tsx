@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { performLogIn } from "../utils/log";
 
 import { useNavigate } from "react-router-dom";
-import useMapLogin from "../hooks/useMapLogin";
 import { TRootStore } from "../store";
 
 export default function Login(props: any) {
@@ -20,8 +19,6 @@ export default function Login(props: any) {
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
-  useMapLogin();
 
   useEffect(() => {
     if (userId) {

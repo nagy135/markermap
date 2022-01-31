@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useMapLogin from "../hooks/useMapLogin";
 
 import { TRootStore } from "../store";
 
 export default function Detail(_props: any) {
+  useMapLogin();
   const userId = useSelector((state: TRootStore) => state.log.userId);
 
   const [uploadedFile, setUploadedFile] = useState<any>({});
@@ -57,6 +59,7 @@ export default function Detail(_props: any) {
 
     const recordUploadResponse = (
       await axios.post(`${endpoint}/records`, {
+        userId,
         name: "TEST",
         lat: (Number("49.18382677567287") + Math.random() / 10).toFixed(14),
         lon: (Number("19.752156530646067") + Math.random() / 10).toFixed(14),

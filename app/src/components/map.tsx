@@ -14,12 +14,13 @@ import Detail from "./detail";
 export default function Map(_props: any) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useMapLogin();
 
-  // const userId = useSelector((state: TRootStore) => state.log.userId);
+  const userId = useSelector((state: TRootStore) => state.log.userId);
+
   const selectedRecord = useSelector(
     (state: TRootStore) => state.map.selectedRecord
   );
-  useMapLogin();
 
   const logOut = () => {
     localStorage.removeItem("loginToken");

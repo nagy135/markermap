@@ -52,8 +52,12 @@ export default function Images(props: TImageProps) {
         itemClass="carousel-item"
         responsive={responsive}
       >
-        {selectedRecord.images.map((image) => (
-          <img src={`${API_ENDPOINT}/${image.path}`} alt="" />
+        {selectedRecord.images.map((image, k) => (
+          <img
+            key={`image_${k}`}
+            src={`${API_ENDPOINT}/${image.path}`}
+            alt=""
+          />
         ))}
       </Carousel>
     </div>
