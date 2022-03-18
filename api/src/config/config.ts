@@ -6,10 +6,10 @@ export interface IConfig {
 }
 
 const config: IConfig = {
-  service: 'api-gateway',
+  service: 'api',
   userRole: 'cbae4f81-a1df-4ef3-9a48-9ad28a21af3a',
   adminRole: '7c70e397-45c0-47e7-a5f1-b220b21fe55d',
-  port: 7000,
+  port: 4200,
 };
 
 export default config;
