@@ -32,6 +32,12 @@ services:
       - "3300:3000"
     stdin_open: true
 
+  # AUTH
+  supertokens:
+    image: "registry.supertokens.io/supertokens/supertokens-postgresql"
+    ports:
+      - "3567:3567"
+
 volumes:
   database:
     name: database
