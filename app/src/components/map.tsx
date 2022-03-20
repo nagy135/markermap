@@ -104,7 +104,6 @@ export default function Map(_props: any) {
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&",
-            v: "beta",
           }}
           defaultCenter={defaultMapCenter}
           defaultZoom={defaultZoom}
