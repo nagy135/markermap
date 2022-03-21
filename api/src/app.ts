@@ -6,7 +6,11 @@ import ErrorMiddleware from '@middleware/error.middleware';
 import Logger from '@handler/logger/winston';
 import RouterV1 from '@routes/v1';
 import config from '@config/config';
-import dotenv from 'dotenv';
+import Session from 'supertokens-node/recipe/session';
+// let { verifySession } = require("supertokens-node/recipe/session/framework/express");
+import { middleware, errorHandler } from 'supertokens-node/framework/express';
+import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword';
+import supertokens from 'supertokens-node';
 
 import {
   MorganErrorMiddleware,
@@ -72,15 +76,6 @@ const corsOptions: any = {
     'api-key',
   ],
 };
-
-const Session = require('supertokens-node/recipe/session');
-// let { verifySession } = require("supertokens-node/recipe/session/framework/express");
-const {
-  middleware,
-  errorHandler,
-} = require('supertokens-node/framework/express');
-const ThirdPartyEmailPassword = require('supertokens-node/recipe/thirdpartyemailpassword');
-const supertokens = require('supertokens-node');
 
 const apiPort = 4200;
 const apiDomain = `http://localhost:${apiPort}`;
