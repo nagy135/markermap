@@ -20,26 +20,26 @@ import ThirdPartyEmailPassword, {
 import Session from "supertokens-auth-react/recipe/session";
 import * as reactRouterDom from "react-router-dom";
 
-const apiPort = 4200;
-const apiDomain = `http://localhost:${apiPort}`;
+const apiPort = Number(process.env.API_PORT) || 4200;
+const apiDomain = `http://localhost:${apiPort}`; // process.env.API_URL
 
-const websitePort = 3300;
-const websiteDomain = `http://localhost:${websitePort}`;
+const appPort = Number(process.env.APP_PORT) || 3300;
+const appDomain = `http://localhost:${appPort}`; // process.env.APP_URL
 
 SuperTokens.init({
   appInfo: {
     appName: "Marker map",
     apiDomain,
-    websiteDomain,
+    websiteDomain: appDomain,
   },
   recipeList: [
     ThirdPartyEmailPassword.init({
       signInAndUpFeature: {
         providers: [
-          // We have provided you with development keys which you can use for testing.
-          // IMPORTANT: Please replace them with your own OAuth keys for production use.
           Google.init(),
           Github.init(),
+          Facebook.init(),
+          Apple.init(),
         ],
       },
     }),
@@ -52,9 +52,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          {/*This renders the login UI on the /auth route*/}
           {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
-          {/*Your app routes*/}
           <Route
             path="/"
             element={
@@ -63,7 +61,14 @@ function App() {
               </ThirdPartyEmailPasswordAuth>
             }
           />
-          <Route path="/add" element={<Adder />} />
+          <Route
+            path="/add"
+            element={
+              <ThirdPartyEmailPasswordAuth>
+                <Adder />
+              </ThirdPartyEmailPasswordAuth>
+            }
+          />
         </Routes>
         <Toaster />
       </Router>
