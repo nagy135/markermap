@@ -1,15 +1,13 @@
 import { Box, Button, Container, Input, Stack, TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import useMapLogin from "../hooks/useMapLogin";
 import "./css/adder.css";
 
-import { TRootStore } from "../store";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function Detail(_props: any) {
-  useMapLogin();
-  const userId = useSelector((state: TRootStore) => state.log.userId);
+  const { userId } = useSessionContext();
+  console.log("================\n", "userId: ", userId, "\n================");
 
   const [uploadedFile, setUploadedFile] = useState<any>({});
   const [recordName, _] = useState("");

@@ -1,23 +1,18 @@
 import GoogleMapReact from "google-map-react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
 import { defaultMapCenter, defaultZoom } from "../utils/constants";
-import useMapLogin from "../hooks/useMapLogin";
 import { getRecords, TRecordResponse } from "../utils/record";
 import { toast } from "../utils/toast";
 import { TRootStore } from "../store";
 import Detail from "./detail";
 import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+// import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function Map(_props: any) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  useMapLogin();
-
-  const userId = useSelector((state: TRootStore) => state.log.userId);
 
   const selectedRecord = useSelector(
     (state: TRootStore) => state.map.selectedRecord
@@ -26,9 +21,6 @@ export default function Map(_props: any) {
   const logOut = async () => {
     await signOut();
     window.location.href = "/auth";
-    // localStorage.removeItem("loginToken");
-    // dispatch({ type: "LOG_OUT" });
-    // navigate("/");
   };
 
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
