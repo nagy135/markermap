@@ -15,6 +15,7 @@ import ThirdPartyEmailPassword, {
   Google,
   Facebook,
   Apple,
+  ThirdPartyEmailPasswordAuth,
 } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import Session from "supertokens-auth-react/recipe/session";
 import * as reactRouterDom from "react-router-dom";
@@ -54,8 +55,14 @@ function App() {
           {/*This renders the login UI on the /auth route*/}
           {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
           {/*Your app routes*/}
-          <Route path="/" element={<Login />} />
-          <Route path="/map" element={<Map />} />
+          <Route
+            path="/"
+            element={
+              <ThirdPartyEmailPasswordAuth>
+                <Map />
+              </ThirdPartyEmailPasswordAuth>
+            }
+          />
           <Route path="/add" element={<Adder />} />
         </Routes>
         <Toaster />

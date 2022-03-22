@@ -10,6 +10,7 @@ import { getRecords, TRecordResponse } from "../utils/record";
 import { toast } from "../utils/toast";
 import { TRootStore } from "../store";
 import Detail from "./detail";
+import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 export default function Map(_props: any) {
   const dispatch = useDispatch();
@@ -22,10 +23,12 @@ export default function Map(_props: any) {
     (state: TRootStore) => state.map.selectedRecord
   );
 
-  const logOut = () => {
-    localStorage.removeItem("loginToken");
-    dispatch({ type: "LOG_OUT" });
-    navigate("/");
+  const logOut = async () => {
+    await signOut();
+    window.location.href = "/auth";
+    // localStorage.removeItem("loginToken");
+    // dispatch({ type: "LOG_OUT" });
+    // navigate("/");
   };
 
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
@@ -95,7 +98,7 @@ export default function Map(_props: any) {
         size="large"
         color="warning"
         variant="contained"
-        onClick={() => logOut()}
+        onClick={logOut}
       >
         Log OUT
       </Button>
