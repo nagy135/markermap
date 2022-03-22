@@ -15,6 +15,7 @@ services:
       dockerfile: ./dockerfile.develop
       context: ./api
     env_file:
+      - ./env/.env.global
       - ./env/.env.api
     ports:
       - "127.0.0.1:4200:7000"
@@ -26,6 +27,8 @@ services:
     build:
       context: ./app/
       dockerfile: ./dockerfile.develop
+    env_file:
+      - ./env/.env.global
     volumes:
       - ./app:/app
     ports:
@@ -36,7 +39,7 @@ services:
   supertokens:
     image: "registry.supertokens.io/supertokens/supertokens-postgresql"
     ports:
-      - "3567:3567"
+      - "127.0.0.1:3567:3567"
 
 volumes:
   database:
