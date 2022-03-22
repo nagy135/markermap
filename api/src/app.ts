@@ -92,7 +92,7 @@ const createApplication = async () => {
     supertokens.init({
       framework: 'express',
       supertokens: {
-        connectionURI: 'http://localhost:3567',
+        connectionURI: 'http://supertokens:3567',
       },
       appInfo: {
         appName: 'Marker map', // TODO: Your app name
@@ -119,23 +119,22 @@ const createApplication = async () => {
       ],
     });
 
-    app.use(
-      cors({
-        ...corsOptions,
-        allowedHeaders: [
-          ...corsOptions.allowedHeaders,
-          ...supertokens.getAllCORSHeaders(),
-        ],
-        methods: ['GET', 'PUT', 'POST', 'DELETE'],
-        credentials: true,
-      })
-    );
-
     // app.use(
     //   helmet({
     //     contentSecurityPolicy: false,
     //   })
     // );
+    app.use(
+      cors({
+        ...corsOptions,
+        origin: websiteDomain,
+        allowedHeaders: [
+          ...corsOptions.allowedHeaders,
+          ...supertokens.getAllCORSHeaders(),
+        ],
+        credentials: true,
+      })
+    );
     app.use(middleware());
 
     // // custom API that requires session verification
@@ -148,8 +147,6 @@ const createApplication = async () => {
     //   });
     // });
 
-    app.use(errorHandler());
-
     app.use(Express.static('uploads'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -157,6 +154,7 @@ const createApplication = async () => {
     app.use(MorganErrorMiddleware);
     app.use('/v1', RouterV1);
     app.use(ErrorMiddleware);
+    app.use(errorHandler());
     const server: Net.Server = app.listen(config.port);
     server.on('error', onHttpError);
     server.on('listening', () => onListening(server));

@@ -9,7 +9,7 @@ const config: IConfig = {
   service: 'api',
   userRole: 'cbae4f81-a1df-4ef3-9a48-9ad28a21af3a',
   adminRole: '7c70e397-45c0-47e7-a5f1-b220b21fe55d',
-  port: 4200,
+  port: 7000,
 };
 
 export default config;
