@@ -127,7 +127,6 @@ const createApplication = async () => {
     app.use(
       cors({
         ...corsOptions,
-        origin: websiteDomain,
         allowedHeaders: [
           ...corsOptions.allowedHeaders,
           ...supertokens.getAllCORSHeaders(),
