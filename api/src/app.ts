@@ -77,11 +77,14 @@ const corsOptions: any = {
   ],
 };
 
-const apiPort = 4200;
-const apiDomain = `http://localhost:${apiPort}`;
+const apiPort = Number(process.env.API_PORT) || 4200;
+const apiDomain = `http://localhost:${apiPort}`; // process.env.API_URL
 
-const websitePort = 3300;
-const websiteDomain = `http://localhost:${websitePort}`;
+const appPort = Number(process.env.APP_PORT) || 3300;
+const appDomain = `http://localhost:${appPort}`; // process.env.APP_URL
+
+const supertokensPort = Number(process.env.SUPERTOKENS_PORT) || 3567;
+const supertokensDomain = `http://supertokens:${supertokensPort}`; // process.env.SUPERTOKENS_URL
 
 /**
  * Run function
@@ -92,12 +95,12 @@ const createApplication = async () => {
     supertokens.init({
       framework: 'express',
       supertokens: {
-        connectionURI: 'http://supertokens:3567',
+        connectionURI: supertokensDomain,
       },
       appInfo: {
-        appName: 'Marker map', // TODO: Your app name
-        apiDomain, // TODO: Change to your app's API domain
-        websiteDomain, // TODO: Change to your app's website domain
+        appName: 'Marker map',
+        apiDomain,
+        websiteDomain: appDomain,
       },
       recipeList: [
         ThirdPartyEmailPassword.init({
