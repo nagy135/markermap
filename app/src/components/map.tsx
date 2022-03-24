@@ -9,10 +9,11 @@ import { toast } from "../utils/toast";
 import { TRootStore } from "../store";
 import Detail from "./detail";
 import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-// import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function Map(_props: any) {
   const dispatch = useDispatch();
+  let user = useSessionContext();
 
   const selectedRecord = useSelector(
     (state: TRootStore) => state.map.selectedRecord
@@ -92,7 +93,7 @@ export default function Map(_props: any) {
         variant="contained"
         onClick={logOut}
       >
-        Log OUT
+        {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
       </Button>
       <div style={{ height: "100vh", width: "100%" }}>
         <Detail />

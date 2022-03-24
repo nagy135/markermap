@@ -55,7 +55,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ThirdPartyEmailPasswordAuth>
+              <ThirdPartyEmailPasswordAuth requireAuth={false}>
                 <Map />
               </ThirdPartyEmailPasswordAuth>
             }
