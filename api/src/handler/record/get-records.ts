@@ -10,6 +10,13 @@ export default async (
 ): Promise<TPaginationResult<RecordEntity>> => {
   const recordRepository = getCustomRepository(RecordRepository);
 
+  const query = recordRepository
+    .createQueryBuilder('self')
+    .leftJoinAndSelect('self.images', 'images');
+
+  if (data.userId)
+    query.where('self.user_id = :userId', { userId: data.userId });
+
   // FETCHING RESULTS
 
   const paginationOptions = {
@@ -17,9 +24,7 @@ export default async (
   };
 
   const paginatedResult = await getPaginatedResult(
-    recordRepository
-      .createQueryBuilder('self')
-      .leftJoinAndSelect('self.images', 'images'),
+    query,
     paginationOptions as TPaginationOptions,
     data
   );

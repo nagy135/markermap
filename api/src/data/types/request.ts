@@ -14,7 +14,9 @@ export type TRequestCreateUser = {
 // }}}
 
 // record {{{
-export type TRequestGetRecords = TPaginationOptions;
+export type TRequestGetRecords = TPaginationOptions & {
+  userId: string;
+};
 
 export type TRequestGetRecord = Record<string, string>;
 
