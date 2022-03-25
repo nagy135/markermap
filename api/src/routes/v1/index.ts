@@ -5,36 +5,12 @@ const RouterV1 = Router();
 
 import * as UserController from '@controller/user.controller';
 import * as RecordController from '@controller/record.controller';
-import * as LoginController from '@controller/login.controller';
 import * as ImageController from '@controller/image.controller';
 
 import * as UserRequest from '@requests/validation/user';
 import * as RecordRequest from '@requests/validation/record';
-import * as LoginRequest from '@requests/validation/login';
 import * as ImageRequest from '@requests/validation/image';
 import multerUploader from '@utils/multer-uploader';
-
-// login {{{
-
-const LOG_ROUTE_BASE_PATH = '/log';
-
-RouterV1.post(
-  `${LOG_ROUTE_BASE_PATH}/in`,
-  validate(LoginRequest.loginRequest),
-  LoginController.login
-);
-RouterV1.post(
-  `${LOG_ROUTE_BASE_PATH}/recover`,
-  validate(LoginRequest.recoverRequest),
-  LoginController.recover
-);
-RouterV1.post(
-  `${LOG_ROUTE_BASE_PATH}/out`,
-  validate(LoginRequest.logoutRequest),
-  LoginController.logout
-);
-
-// }}}
 
 // users {{{
 
@@ -49,12 +25,6 @@ RouterV1.get(
   `${USER_ROUTE_BASE_PATH}/:userId`,
   validate(UserRequest.getUserRequest),
   UserController.getUser
-);
-
-RouterV1.post(
-  `${USER_ROUTE_BASE_PATH}`,
-  validate(UserRequest.createUserRequest),
-  UserController.createUser
 );
 
 RouterV1.delete(
