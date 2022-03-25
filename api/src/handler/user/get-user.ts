@@ -1,9 +1,10 @@
-import { getCustomRepository } from 'typeorm';
-import UserRepository from '@repository/user.repository';
-import UserEntity from '@entity/user.entity';
+import ThirdParty from 'supertokens-node/recipe/thirdparty';
 
-export default async (id: string): Promise<UserEntity> => {
-  const userRepository = getCustomRepository(UserRepository);
+export default async (id: string): Promise<{ email: string }> => {
+  // TODO: this doesnt work (make proper entity)
+  const userInfo = await ThirdParty.getUserById(id);
 
-  return userRepository.getById(id);
+  return {
+    email: userInfo?.email ?? '',
+  };
 };

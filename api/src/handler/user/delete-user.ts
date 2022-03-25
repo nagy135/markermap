@@ -1,8 +1,5 @@
-import { getCustomRepository } from 'typeorm';
-import UserRepository from '@repository/user.repository';
+import { deleteUser } from 'supertokens-node';
 
 export default async (id: string): Promise<void> => {
-  const userRepository = getCustomRepository(UserRepository);
-
-  return userRepository.deleteById(id);
+  await deleteUser(id);
 };
