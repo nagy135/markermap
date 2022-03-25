@@ -10,6 +10,7 @@ export const getRecordRequest = {
 export const getRecordsRequest = {
   query: {
     ...paginationDefaults,
+    userId: yup.string().uuid().optional(),
   },
 };
 

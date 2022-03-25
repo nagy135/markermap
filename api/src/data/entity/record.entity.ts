@@ -33,6 +33,7 @@ export default class RecordEntity extends BaseEntity {
   @Column({ type: 'numeric' })
   altitude: number;
 
+  @Column({ name: 'user_id', type: 'varchar' })
   userId: string;
 
   @OneToMany(() => ImageEntity, (image: ImageEntity) => image.record)

@@ -15,7 +15,7 @@ export default async (
     .leftJoinAndSelect('self.images', 'images');
 
   if (data.userId)
-    query.where('self.user_id = :userId', { userId: data.userId });
+    query.where('self.userId = :userId', { userId: data.userId });
 
   // FETCHING RESULTS
 
