@@ -1,7 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import RecordEntity from '@entity/record.entity';
 import { TRequestCreateRecord } from '@ctypes/request';
-import UserEntity from '@entity/user.entity';
 
 @EntityRepository(RecordEntity)
 export default class RecordRepository extends Repository<RecordEntity> {
@@ -31,7 +30,7 @@ export default class RecordRepository extends Repository<RecordEntity> {
     record.lat = lat;
     record.lon = lon;
     record.altitude = altitude;
-    record.user = await UserEntity.findOneOrFail(userId);
+    record.userId = userId;
     await record.save();
 
     return record.id;

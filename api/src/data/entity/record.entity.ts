@@ -6,12 +6,9 @@ import {
   DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
   OneToMany,
 } from 'typeorm';
 
-import UserEntity from './user.entity';
 import ImageEntity from './image.entity';
 
 /**
@@ -36,11 +33,7 @@ export default class RecordEntity extends BaseEntity {
   @Column({ type: 'numeric' })
   altitude: number;
 
-  // relations
-
-  @ManyToOne(() => UserEntity, (user: UserEntity) => user.id)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  userId: string;
 
   @OneToMany(() => ImageEntity, (image: ImageEntity) => image.record)
   images: ImageEntity[];
