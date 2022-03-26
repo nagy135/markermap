@@ -10,6 +10,7 @@ import { TRootStore } from "../store";
 import Detail from "./detail";
 import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import "./css/map.css";
 
 export default function Map(_props: any) {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ export default function Map(_props: any) {
   const logOut = async () => {
     await signOut();
     window.location.href = "/auth";
+  };
+
+  const addRecord = async () => {
+    window.location.href = "/add";
   };
 
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
@@ -79,30 +84,36 @@ export default function Map(_props: any) {
 
   return (
     <>
-      <Button
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          zIndex: 9999,
-          margin: 8,
-          marginTop: 20,
-        }}
-        size="large"
-        color="warning"
-        variant="contained"
-        onClick={logOut}
-      >
-        {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
-      </Button>
+      <div className="map-buttons">
+        <Button
+          size="large"
+          color="warning"
+          variant="contained"
+          onClick={logOut}
+        >
+          {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
+        </Button>
+        {user.doesSessionExist ? (
+          <Button
+            size="large"
+            color="info"
+            variant="contained"
+            onClick={addRecord}
+          >
+            Add
+          </Button>
+        ) : null}
+      </div>
       <div style={{ height: "100vh", width: "100%" }}>
         <Detail />
         <GoogleMapReact
+          draggable={false}
           bootstrapURLKeys={{
             key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&",
           }}
           defaultCenter={defaultMapCenter}
           defaultZoom={defaultZoom}
+          onClick={(e) => console.log(e)}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map }) => storeInstance(map)}
           // layerTypes={['TransitLayer', 'TrafficLayer']}
