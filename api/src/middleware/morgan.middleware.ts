@@ -14,7 +14,7 @@ export const MorganInfoMiddleware = (
 
   return morgan('short', {
     stream,
-    skip: function (req, res) {
+    skip: function (_req, res) {
       return res.statusCode >= 400;
     },
   })(request, response, next);
@@ -32,7 +32,7 @@ export const MorganErrorMiddleware = (
 
   return morgan('short', {
     stream,
-    skip: function (req, res) {
+    skip: function (_req, res) {
       return res.statusCode < 400;
     },
   })(request, response, next);
