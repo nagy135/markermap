@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { RESPONSE_STATUS_OK, STATUS_HTTP_OK } from '@utils/http-codes';
 import RecordHandler from '@handler/record';
 import { TApplicationError } from '@utils/app-errors';
+import { TRequestGetRecords } from '@ctypes/request';
 
 /**
  * lists all records
@@ -15,7 +16,9 @@ export const getRecords = async (
   next: NextFunction
 ): Promise<Response | TApplicationError | undefined> => {
   try {
-    const data = await RecordHandler.getRecords(req.query);
+    const data = await RecordHandler.getRecords(
+      req.query as TRequestGetRecords
+    );
 
     return res.status(STATUS_HTTP_OK).send({
       status: RESPONSE_STATUS_OK,
