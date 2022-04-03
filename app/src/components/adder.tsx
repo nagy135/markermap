@@ -4,36 +4,19 @@ import { useState } from "react";
 import "./css/adder.css";
 
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { useSearchParams } from "react-router-dom";
 
 export default function Detail(_props: any) {
   const { userId } = useSessionContext();
-  console.log("================\n", "userId: ", userId, "\n================");
+  const [searchParams] = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
 
   const [uploadedFile, setUploadedFile] = useState<any>({});
-  const [recordName, _] = useState("");
+  const [recordName] = useState("");
+  const [recordLat] = useState(lat ?? "");
+  const [recordLng] = useState(lng ?? "");
 
-  const fileData = () => {
-    if (uploadedFile) {
-      return (
-        <div>
-          <h2>File Details:</h2>
-
-          <p>File Name: {uploadedFile?.name}</p>
-
-          <p>File Type: {uploadedFile?.type}</p>
-
-          <p>Last Modified: {uploadedFile.lastModifiedDate?.toDateString()}</p>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
-        </div>
-      );
-    }
-  };
   const onFileChange = (event: any) => {
     setUploadedFile({ selectedFile: event.target.files[0] });
   };
@@ -78,14 +61,18 @@ export default function Detail(_props: any) {
       <h1>Create New Record</h1>
       <Box className="create-record">
         <Stack spacing={2}>
-          <Input type="file" onChange={onFileChange} />
           <TextField label="Name" value={recordName} />
+          <TextField label="Latitude" value={recordLat} />
+          <TextField label="Longitude" value={recordLng} />
+          <Button variant="contained" component="label">
+            upload image
+            <input type="file" hidden onChange={onFileChange} />
+          </Button>
           <Button variant="contained" onClick={onFileUpload}>
             Upload
           </Button>
         </Stack>
       </Box>
-      {fileData()}
     </Container>
   );
 }

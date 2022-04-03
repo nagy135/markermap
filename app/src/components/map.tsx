@@ -35,6 +35,16 @@ export default function Map(_props: any) {
     Record<string, google.maps.Marker>
   >({});
 
+  /**
+   * Redirects to adder page with prefilled lat/lon
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  const addPrefilledRecord = (lat: number, lng: number) => {
+    if (window.confirm("Create new record here?"))
+      window.location.href = `/add?lat=${lat}&lng=${lng}`;
+  };
+
   useEffect(() => {
     (async () => {
       const records = await getRecords();
@@ -107,13 +117,13 @@ export default function Map(_props: any) {
       <div style={{ height: "100vh", width: "100%" }}>
         <Detail />
         <GoogleMapReact
-          draggable={false}
+          draggable={true}
           bootstrapURLKeys={{
             key: "AIzaSyBEPCDqimEMFijE3Oo0w22qn6dh8ql2Zg4&",
           }}
           defaultCenter={defaultMapCenter}
           defaultZoom={defaultZoom}
-          onClick={(e) => console.log(e)}
+          onClick={(e) => addPrefilledRecord(e.lat, e.lng)}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map }) => storeInstance(map)}
           // layerTypes={['TransitLayer', 'TrafficLayer']}
