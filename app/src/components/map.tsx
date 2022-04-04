@@ -34,6 +34,11 @@ export default function Map(_props: any) {
   const [shownRecords, setShownRecords] = useState<
     Record<string, google.maps.Marker>
   >({});
+  const [addingNewRecord, setAddingNewRecord] = useState<boolean>(false);
+
+  const addingNewRecordHandler = () => {
+    setAddingNewRecord((prev) => !prev);
+  };
 
   /**
    * Redirects to adder page with prefilled lat/lon
@@ -41,7 +46,7 @@ export default function Map(_props: any) {
    * @author Viktor Nagy <viktor.nagy@01people.com>
    */
   const addPrefilledRecord = (lat: number, lng: number) => {
-    if (window.confirm("Create new record here?"))
+    if (addingNewRecord && window.confirm("Create new record here?"))
       window.location.href = `/add?lat=${lat}&lng=${lng}`;
   };
 
@@ -60,7 +65,13 @@ export default function Map(_props: any) {
     if (position && mapInstance) mapInstance.setCenter(position);
   }, [selectedRecord, shownRecords]);
 
-  const storeInstance = (map: google.maps.Map) => setMapInstance(map);
+  const storeInstance = (map: google.maps.Map) => {
+    map.setOptions({
+      draggableCursor: "default",
+      draggingCursor: "pointer",
+    });
+    setMapInstance(map);
+  };
 
   useEffect(() => {
     if (!visited || !mapInstance) return;
@@ -104,14 +115,24 @@ export default function Map(_props: any) {
           {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
         </Button>
         {user.doesSessionExist ? (
-          <Button
-            size="large"
-            color="info"
-            variant="contained"
-            onClick={addRecord}
-          >
-            Add
-          </Button>
+          <>
+            <Button
+              size="large"
+              color="info"
+              variant="contained"
+              onClick={addRecord}
+            >
+              Add
+            </Button>
+            <Button
+              size="large"
+              color="info"
+              variant="contained"
+              onClick={addingNewRecordHandler}
+            >
+              {addingNewRecord ? "Stop adding" : "Add (click on map)"}
+            </Button>
+          </>
         ) : null}
       </div>
       <div style={{ height: "100vh", width: "100%" }}>
