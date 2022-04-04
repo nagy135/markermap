@@ -34,10 +34,12 @@ export default function Detail(_props: any) {
         open={selectedRecord !== undefined}
         onClose={close()}
       >
-        <Button onClick={close()}>close</Button>
         {selectedRecord ? (
           <Box style={{ margin: 10 }}>
             <Stack spacing={2}>
+              <Button variant="outlined" color="error" onClick={close()}>
+                close
+              </Button>
               <TextField
                 id="outlined-read-only-input"
                 label="Name"
@@ -70,7 +72,14 @@ export default function Detail(_props: any) {
                   readOnly: true,
                 }}
               />
-              <button onClick={() => setImagesOpen(true)}>Images</button>
+              <Button
+                size="large"
+                color="success"
+                variant="contained"
+                onClick={() => setImagesOpen(true)}
+              >
+                Images
+              </Button>
             </Stack>
           </Box>
         ) : (
