@@ -1,6 +1,11 @@
 h1 {
   text-align: center;
 }
+.back-to-map {
+  position: fixed;
+  top: 2px;
+  left: 2px;
+}
 @media only screen and (min-width: 992px) {
   .create-record {
     width: 40%;

@@ -60,39 +60,54 @@ export default function Detail(_props: any) {
   };
 
   return (
-    <Container>
-      <h1>Create New Record</h1>
-      <Box className="create-record">
-        <Stack spacing={2}>
-          <TextField
-            label="Name"
-            value={recordName}
-            onChange={(e) => setRecordName(e.target.value)}
-          />
-          <TextField
-            label="Latitude"
-            value={recordLat}
-            onChange={(e) => setRecordLat(e.target.value)}
-          />
-          <TextField
-            label="Longitude"
-            value={recordLng}
-            onChange={(e) => setRecordLng(e.target.value)}
-          />
-          <TextField
-            label="Altitude"
-            value={recordAltitude}
-            onChange={(e) => setRecordAltitude(e.target.value)}
-          />
-          <Box className="upload-info">
-            To upload multiple files, simply click "upload image" multiple times
-          </Box>
-          <Button variant="contained" component="label">
-            upload image
-            <input type="file" hidden onChange={onFileChange} />
-          </Button>
-        </Stack>
-      </Box>
-    </Container>
+    <>
+      <Container>
+        <h1>Create New Record</h1>
+        <Box className="create-record">
+          <Stack spacing={2}>
+            <TextField
+              label="Name"
+              value={recordName}
+              onChange={(e) => setRecordName(e.target.value)}
+            />
+            <TextField
+              label="Latitude"
+              value={recordLat}
+              onChange={(e) => setRecordLat(e.target.value)}
+            />
+            <TextField
+              label="Longitude"
+              value={recordLng}
+              onChange={(e) => setRecordLng(e.target.value)}
+            />
+            <TextField
+              label="Altitude"
+              value={recordAltitude}
+              onChange={(e) => setRecordAltitude(e.target.value)}
+            />
+            <Box className="upload-info">
+              To upload multiple files, simply click "upload image" multiple
+              times
+            </Box>
+            <Button variant="contained" component="label">
+              upload image
+              <input type="file" hidden onChange={onFileChange} />
+            </Button>
+          </Stack>
+        </Box>
+      </Container>
+      <div className="back-to-map">
+        <Button
+          size="large"
+          color="warning"
+          variant="contained"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Back
+        </Button>
+      </div>
+    </>
   );
 }
