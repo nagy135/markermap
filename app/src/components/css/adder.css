@@ -6,10 +6,18 @@ h1 {
   top: 2px;
   left: 2px;
 }
+.create-record {
+  margin-top: 4em;
+}
 @media only screen and (min-width: 992px) {
   .create-record {
     width: 40%;
     margin-left: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 3em;
+    padding-top: 0;
+    margin-top: 1em;
   }
 }
 .upload-info {

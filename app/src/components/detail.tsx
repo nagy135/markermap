@@ -51,6 +51,7 @@ export default function Detail(_props: any) {
               <TextField
                 id="outlined-read-only-input"
                 label="Latitude"
+                variant="standard"
                 value={selectedRecord.lat}
                 InputProps={{
                   readOnly: true,
@@ -59,6 +60,7 @@ export default function Detail(_props: any) {
               <TextField
                 id="outlined-read-only-input"
                 label="Longitude"
+                variant="standard"
                 value={selectedRecord.lon}
                 InputProps={{
                   readOnly: true,
@@ -67,6 +69,7 @@ export default function Detail(_props: any) {
               <TextField
                 id="outlined-read-only-input"
                 label="Altitude"
+                variant="standard"
                 value={selectedRecord.altitude}
                 InputProps={{
                   readOnly: true,

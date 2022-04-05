@@ -115,24 +115,14 @@ export default function Map(_props: any) {
           {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
         </Button>
         {user.doesSessionExist ? (
-          <>
-            <Button
-              size="large"
-              color="info"
-              variant="contained"
-              onClick={addRecord}
-            >
-              Add
-            </Button>
-            <Button
-              size="large"
-              color="info"
-              variant="contained"
-              onClick={addingNewRecordHandler}
-            >
-              {addingNewRecord ? "Stop adding" : "Add (click on map)"}
-            </Button>
-          </>
+          <Button
+            size="large"
+            color="info"
+            variant="contained"
+            onClick={addingNewRecordHandler}
+          >
+            {addingNewRecord ? "Stop adding" : "Add"}
+          </Button>
         ) : null}
       </div>
       <div style={{ height: "100vh", width: "100%" }}>

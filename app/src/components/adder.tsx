@@ -62,8 +62,8 @@ export default function Detail(_props: any) {
   return (
     <>
       <Container>
-        <h1>Create New Record</h1>
         <Box className="create-record">
+          <h1>Create New Record</h1>
           <Stack spacing={2}>
             <TextField
               label="Name"
@@ -73,16 +73,19 @@ export default function Detail(_props: any) {
             <TextField
               label="Latitude"
               value={recordLat}
+              variant="standard"
               onChange={(e) => setRecordLat(e.target.value)}
             />
             <TextField
               label="Longitude"
               value={recordLng}
+              variant="standard"
               onChange={(e) => setRecordLng(e.target.value)}
             />
             <TextField
               label="Altitude"
               value={recordAltitude}
+              variant="standard"
               onChange={(e) => setRecordAltitude(e.target.value)}
             />
             <Box className="upload-info">
