@@ -11,45 +11,28 @@ import Detail from "./detail";
 import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import "./css/map.css";
+import { ClickAwayListener, Tooltip } from "@mui/material";
 
 export default function Map(_props: any) {
+  // hooks {{{
   const dispatch = useDispatch();
   let user = useSessionContext();
-
   const selectedRecord = useSelector(
     (state: TRootStore) => state.map.selectedRecord
   );
+  // }}}
 
-  const logOut = async () => {
-    await signOut();
-    window.location.href = "/auth";
-  };
-
-  const addRecord = async () => {
-    window.location.href = "/add";
-  };
-
+  // states {{{
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
   const [visited, setVisited] = useState<TRecordResponse[]>([]);
   const [shownRecords, setShownRecords] = useState<
     Record<string, google.maps.Marker>
   >({});
   const [addingNewRecord, setAddingNewRecord] = useState<boolean>(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  // }}}
 
-  const addingNewRecordHandler = () => {
-    setAddingNewRecord((prev) => !prev);
-  };
-
-  /**
-   * Redirects to adder page with prefilled lat/lon
-   *
-   * @author Viktor Nagy <viktor.nagy@01people.com>
-   */
-  const addPrefilledRecord = (lat: number, lng: number) => {
-    if (addingNewRecord && window.confirm("Create new record here?"))
-      window.location.href = `/add?lat=${lat}&lng=${lng}`;
-  };
-
+  // useEffects {{{
   useEffect(() => {
     (async () => {
       const records = await getRecords();
@@ -102,6 +85,37 @@ export default function Map(_props: any) {
       ...newRecords,
     });
   }, [visited, mapInstance]);
+  // }}}
+
+  /**
+   * toggles adding new marker
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  const addingNewRecordHandler = () => {
+    setTooltipOpen(!addingNewRecord);
+    setAddingNewRecord((prev) => !prev);
+  };
+
+  /**
+   * logs out user user supertokens hook and redirects back to login page
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  const logOut = async () => {
+    await signOut();
+    window.location.href = "/auth";
+  };
+
+  /**
+   * Redirects to adder page with prefilled lat/lon
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
+  const addPrefilledRecord = (lat: number, lng: number) => {
+    if (addingNewRecord && window.confirm("Create new record here?"))
+      window.location.href = `/add?lat=${lat}&lng=${lng}`;
+  };
 
   return (
     <>
@@ -115,14 +129,28 @@ export default function Map(_props: any) {
           {user.doesSessionExist ? <span>LOG OUT</span> : <span>LOG IN</span>}
         </Button>
         {user.doesSessionExist ? (
-          <Button
-            size="large"
-            color="info"
-            variant="contained"
-            onClick={addingNewRecordHandler}
-          >
-            {addingNewRecord ? "Stop adding" : "Add"}
-          </Button>
+          <ClickAwayListener onClickAway={() => setTooltipOpen(false)}>
+            <Tooltip
+              PopperProps={{
+                disablePortal: true,
+              }}
+              onClose={() => setTooltipOpen(false)}
+              open={tooltipOpen}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title="To add, click on map!"
+            >
+              <Button
+                size="large"
+                color="info"
+                variant="contained"
+                onClick={addingNewRecordHandler}
+              >
+                {addingNewRecord ? "Stop adding" : "Add"}
+              </Button>
+            </Tooltip>
+          </ClickAwayListener>
         ) : null}
       </div>
       <div style={{ height: "100vh", width: "100%" }}>

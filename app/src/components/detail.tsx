@@ -7,12 +7,22 @@ import { Box, Drawer, Stack, TextField } from "@mui/material";
 import Images from "./images";
 
 export default function Detail(_props: any) {
+  // hooks {{{
   const dispatch = useDispatch();
-  const [imagesOpen, setImagesOpen] = useState(false);
   const selectedRecord = useSelector(
     (state: TRootStore) => state.map.selectedRecord
   );
+  // }}}
 
+  // states {{{
+  const [imagesOpen, setImagesOpen] = useState(false);
+  // }}}
+
+  /**
+   * redux defocus record
+   *
+   * @author Viktor Nagy <viktor.nagy@01people.com>
+   */
   const close = () => (event: any) => {
     if (
       event.type === "keydown" &&
@@ -26,11 +36,10 @@ export default function Detail(_props: any) {
     setImagesOpen(false);
   };
 
-  const anchor = "right";
   return (
-    <div style={{ position: "relative" }} key={anchor}>
+    <div style={{ position: "relative" }} key="right">
       <Drawer
-        anchor={anchor}
+        anchor="right"
         open={selectedRecord !== undefined}
         onClose={close()}
       >

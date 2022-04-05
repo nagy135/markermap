@@ -3,21 +3,23 @@ import axios from "axios";
 import { useState } from "react";
 import "./css/adder.css";
 import { toast } from "../utils/toast";
-
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { useSearchParams } from "react-router-dom";
 
 export default function Detail(_props: any) {
+  // hooks {{{
   const { userId } = useSessionContext();
   const [searchParams] = useSearchParams();
+  // }}}
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
-
+  // states {{{
   const [recordId, setRecordId] = useState<string | null>(null);
   const [recordName, setRecordName] = useState("");
   const [recordLat, setRecordLat] = useState(lat ?? "");
   const [recordLng, setRecordLng] = useState(lng ?? "");
   const [recordAltitude, setRecordAltitude] = useState("");
+  // }}}
 
   /**
    * uploads image, can be called multiple times but only first call creates record
