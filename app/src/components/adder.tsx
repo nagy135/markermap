@@ -6,6 +6,8 @@ import { toast } from "../utils/toast";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { useSearchParams } from "react-router-dom";
 
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 export default function Detail(_props: any) {
   // hooks {{{
   const { userId } = useSessionContext();
@@ -19,6 +21,7 @@ export default function Detail(_props: any) {
   const [recordLat, setRecordLat] = useState(lat ?? "");
   const [recordLng, setRecordLng] = useState(lng ?? "");
   const [recordAltitude, setRecordAltitude] = useState("");
+  const [recordDate, setRecordDate] = useState(new Date());
   // }}}
 
   /**
@@ -90,6 +93,7 @@ export default function Detail(_props: any) {
               variant="standard"
               onChange={(e) => setRecordAltitude(e.target.value)}
             />
+            <Calendar onChange={setRecordDate} value={recordDate} />
             <Box className="upload-info">
               To upload multiple files, simply click "upload image" multiple
               times
