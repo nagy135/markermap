@@ -39,6 +39,9 @@ export default class RecordEntity extends BaseEntity {
   @OneToMany(() => ImageEntity, (image: ImageEntity) => image.record)
   images: ImageEntity[];
 
+  @CreateDateColumn({ type: 'timestamp' })
+  date: Date;
+
   // timestamps
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
